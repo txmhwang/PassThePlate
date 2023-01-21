@@ -1,0 +1,13 @@
+.NavBar-container {
+    display: flex;
+    justify-content: flex-end;
+    padding: var(--xl) 64px;
+  }
+.NavBar-linkContainer {
+    display: flex;
+    justify-content: flex-end;
+
+}
+.NavBar-link {
+    color: var(--black);
+}

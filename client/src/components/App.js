@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Router } from "@reach/router";
 import jwt_decode from "jwt-decode";
+import NavBar from "./modules/NavBar.js";
+import Explore from "./pages/Explore.js";
+import Feed from "./pages/Feed.js";
+import Home from "./pages/Homepage.js"
 
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
+// import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
 
@@ -43,10 +47,16 @@ const App = () => {
 
   return (
     <>
-      <Router>
-        <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
-        <NotFound default />
-      </Router>
+      <NavBar/>
+      <div className="App-container">
+        <Router>
+          {/* <Home path="/" /> */}
+          <Feed path="/feed/" />
+          <Explore path="/explore/" />
+          {/* <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} /> */}
+          <NotFound default />
+        </Router>
+      </div>
     </>
   );
 };
