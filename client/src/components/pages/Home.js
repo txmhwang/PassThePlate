@@ -8,9 +8,7 @@ const Homepage = () => {
             <NavBar />
             <Flex direction={"columns"} justifyContent={"center"} alignContent={"center"} w="100%" h="100%"> 
                 <Text>
-                    dasdsa
-                    dasdasd
-                    dasdasa
+                    Home
                 </Text>
             </Flex>
         </>
