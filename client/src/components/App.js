@@ -3,8 +3,9 @@ import { Routes, Route } from "react-router-dom";
 
 import jwt_decode from "jwt-decode";
 
+import NavBar from "./modules/NavBar.js";
+import Homepage from "./pages/Homepage.js"
 import NotFound from "./pages/NotFound.js";
-import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
 
@@ -47,12 +48,7 @@ const App = () => {
       <Route
         path="/"
         element={
-          <Skeleton
-            path="/"
-            handleLogin={handleLogin}
-            handleLogout={handleLogout}
-            userId={userId}
-          />
+          <Homepage path="/"/>
         }
       />
       <Route path="*" element={<NotFound />} />
