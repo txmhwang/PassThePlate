@@ -7,6 +7,7 @@ import NotFound from "./pages/NotFound.js";
 import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
+import Homepage from "./pages/Home.js";
 
 import { socket } from "../client-socket.js";
 
@@ -47,12 +48,7 @@ const App = () => {
       <Route
         path="/"
         element={
-          <Skeleton
-            path="/"
-            handleLogin={handleLogin}
-            handleLogout={handleLogout}
-            userId={userId}
-          />
+          <Homepage />
         }
       />
       <Route path="*" element={<NotFound />} />
