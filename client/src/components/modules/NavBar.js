@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   Box,
   Flex,
@@ -19,9 +19,9 @@ import {
 } from '@chakra-ui/react';
 import { Link as ReachLink } from 'react-router-dom';
 
-export default function Nav() {
-  const { colorMode, toggleColorMode } = useColorMode();
-  const { isOpen, onOpen, onClose } = useDisclosure();
+export default function Nav({loggedIn}) {
+  
+    const [login, setLogin] = useState(false);
   return (
     <>
       <Box bg={useColorModeValue('gray.100', 'gray.900')} px={4}>
@@ -31,12 +31,14 @@ export default function Nav() {
 
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
+                {/* THE FEED LINK */}
                 <Link as={ReachLink} to="/Feed">
                     <Text fontWeight={"bold"}>
                         Feed
                     </Text>
                 </Link>
 
+                {/* THE EXPLORE LINK */}
                 <Link as={ReachLink} to="/Explore">
                     <Text fontWeight={"bold"}>
                         Explore
@@ -44,17 +46,31 @@ export default function Nav() {
                 </Link>
 
               <Menu>
-                <MenuButton
-                  as={Button}
-                  rounded={'full'}
-                  variant={'link'}
-                  cursor={'pointer'}
-                  minW={0}>
-                  <Avatar
-                    size={'sm'}
-                    src={'https://avatars.dicebear.com/api/male/username.svg'}
-                  />
-                </MenuButton>
+                {login ? <Link>
+                    <MenuButton
+                    as={Button}
+                    rounded={'full'}
+                    variant={'link'}
+                    cursor={'pointer'}
+                    minW={0}>
+                    <Avatar
+                        size={'sm'}
+                        src={'https://avatars.dicebear.com/api/male/username.svg'}
+                    />
+                    </MenuButton>
+                </Link> : <MenuButton
+                    as={Button}
+                    rounded={'full'}
+                    variant={'link'}
+                    cursor={'pointer'}
+                    minW={0}>
+                    <Avatar
+                        size={'sm'}
+                        src={'https://avatars.dicebear.com/api/male/username.svg'}
+                    />
+                    </MenuButton>}
+                
+
                 <MenuList alignItems={'center'}>
                   <br />
                   <Center>
