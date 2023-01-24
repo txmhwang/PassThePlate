@@ -8,8 +8,6 @@ const CommentSchema = new mongoose.Schema({
   content: String,
   rating: Number,
   hours: Number,
-  // helpful: Boolean,
-  // pictures: String,
 });
 
 // compile model from schema

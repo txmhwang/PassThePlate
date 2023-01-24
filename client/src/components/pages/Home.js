@@ -1,6 +1,7 @@
 import React from "react";
 import NavBar from "../modules/NavBar";
 import { Text, Box, Flex, Center, Heading } from "@chakra-ui/react";
+import Popup from "../modules/Popup";
 
 const Homepage = () => {
     return (
@@ -12,6 +13,9 @@ const Homepage = () => {
                         PASS THE PLATE
                     </Text>
                 </Heading>
+                
+                {/* The button here will create a pop-up window and asks the users to input a recipe */}
+                <Popup />
             </Flex>
         </>
     )
