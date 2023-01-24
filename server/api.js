@@ -11,7 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
-const Recipe = require("./models/Recipe");
+const Recipe = require("./models/recipe");
 const Comment = require("./models/Comment");
 
 // import authentication library
