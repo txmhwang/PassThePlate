@@ -34,10 +34,20 @@ const LoginPage = () => {
         // TODO: We are going to validate whether or not the user exists within our database. If it is we go back to the homepage
         if (loginEmail.includes("@")) {
             // We also need to check if this email already exists in the database.
-            console.log(loginEmail);
-            console.log(loginPass);
+            let data = {email: loginEmail, password: loginPass};
 
-            get("/api/users").then((users) => console.log(users));
+            get("/api/findUser", data).then((user) => {
+            // this means we found a singular user
+            if (user.length === 1) {
+                navigator("/");
+            }
+            else {
+                // this means either its the wrong password
+                setLoginError(true);
+                setLoginErrorMessage("Wrong email or password")
+            }
+            
+            });
             // navigator("/");
         }
         else {

@@ -11,6 +11,7 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
+const Recipe = requires("./models/recipe");
 
 // import authentication library
 const auth = require("./auth");
@@ -41,6 +42,10 @@ router.post("/initsocket", (req, res) => {
 
 router.get("/users", (req, res) => {
   User.find({}).then((users) => res.send(users));
+})
+
+router.get("/findUser", (req, res) => {
+  User.find({email: req.query.email, password: req.query.password}).then((user) => res.send(user));
 })
 
 router.post("/createUser", (req, res) => {
