@@ -21,7 +21,13 @@ const Card = (props) => {
       commentsList = <div> No comments! </div>
     } else {
       commentsList = comments.map((CommentObj) => {
-        return <SingleComment creator_id={CommentObj.creator_id} creator_name={CommentObj.creator_name} parent={CommentObj.parent} content={CommentObj.content} rating={CommentObj.rating} hours={CommentObj.hours}/>
+        return <SingleComment 
+        // creator_id={CommentObj.creator_id} 
+        // creator_name={CommentObj.creator_name} 
+        parent={CommentObj.parent} 
+        content={CommentObj.content} 
+        rating={CommentObj.rating} 
+        hours={CommentObj.hours}/>
       });
     }
   
@@ -35,8 +41,8 @@ const Card = (props) => {
       <div className="Card-container">
         <SingleRecipe
           recipe_id = {props.recipe_id}
-          creator_id = {props.creator_id}
-          creator_name = {props.creator_name}
+          // creator_id = {props.creator_id}
+          // creator_name = {props.creator_name}
           name = {props.name}
           ingredients = {props.ingredients}
           instructions = {props.instructions}

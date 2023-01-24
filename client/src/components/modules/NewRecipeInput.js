@@ -125,13 +125,13 @@ const NewPostInput = (props) => {
    * @param {string} defaultText is the placeholder text
    */
   const NewRecipe = (props) => {
-    const addRecipe = (recipeName, Ingredients, Instructions) => {
+    const addRecipe = (values) => {
         const body = {
             // creator_id: props.email,
             // creator_name: props.name,
-            name: recipeName,
-            ingredients: Ingredients,
-            instructions: Instructions,
+            name: values.recipeName,
+            ingredients: values.Ingredients,
+            instructions: values.Instructions,
         };
         post("/api/recipes", body).then((recipe) => {
           // display this recipe on the screen

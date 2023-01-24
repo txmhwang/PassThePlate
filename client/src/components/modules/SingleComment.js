@@ -15,9 +15,9 @@ const SingleComment = (props) => {
     return (
         <div className="Comment-container">
             <div className="CommentCreator-container">
-                <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
+                {/* <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
                     {props.creator_name}
-                </Link>
+                </Link> */}
                 <div>
                     Rating: {props.rating}
                     Time to make recipe: {props.hours}

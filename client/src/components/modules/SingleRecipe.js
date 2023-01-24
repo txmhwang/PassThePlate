@@ -15,9 +15,9 @@ const SingleRecipe = (props) => {
     return (
         <div className="RecipeContainer">
             <div className="CreatorContainer">
-                <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
+                {/* <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
                     {props.creator_name}
-                </Link>
+                </Link> */}
                 <h2 className="recipe-name">
                     {props.name}
                 </h2>

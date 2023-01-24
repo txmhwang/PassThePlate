@@ -24,8 +24,8 @@ import { NewComment } from "./NewRecipeInput";
       {props.comments.map((comment) => (
         <SingleComment 
         parent={props.parent} 
-        creator_id={props.creator_id} 
-        creator_name={props.creator_name} 
+        // creator_id={props.creator_id} 
+        // creator_name={props.creator_name} 
         rating={props.rating} 
         hours ={props.hours} 
         content={props.content}/>

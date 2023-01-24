@@ -27,14 +27,19 @@ const Feed = () => {
       recipesList = <div> No Recipes! </div>
     } else {
       recipesList = recipes.map((RecipeObj) => {
-        return <SingleRecipe creator_id={RecipeObj.creator_id} creator_name={RecipeObj.creator_name} name={RecipeObj.name} ingredients={RecipeObj.ingredients} instructions={RecipeObj.instructions}/>
+        return <SingleRecipe 
+        // creator_id={RecipeObj.creator_id} 
+        // creator_name={RecipeObj.creator_name} 
+        name={RecipeObj.name} 
+        ingredients={RecipeObj.ingredients} 
+        instructions={RecipeObj.instructions}/>
       });
     }
   
     
     return ( 
       <div>
-        <NewRecipe/>
+        <NewRecipe addNewRecipe={addNewRecipe}/>
         {recipesList}
       </div>
     );
