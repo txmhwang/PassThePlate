@@ -87,15 +87,20 @@ const NewPostInput = (props) => {
 
   const NewComment = (props) => {
     const addComment = (Content, Rating, Hours) => {
-      const body = {creator_id: props.creator_id, creator_name: props.creator_name, parent: props.recipe_id, content: Content, rating: Rating, hours: Hours};
-      post("/api/comments", body).then((comment) => {
-        // display this comment on the screen
-        props.addNewComment(comment);
-      });
+      const body = {
+        // creator_id: props.creator_id, 
+        // creator_name: props.creator_name, 
+        parent: props.recipe_id, 
+        content: Content, 
+        rating: Rating, 
+        hours: Hours
+      };
+    post("/api/comments", body);
     };
-  
     return <NewPostInput defaultText="New Comment" onSubmit={addComment} />;
   };
+  
+    
 
   /**
    * New Story is a New Post component for comments
@@ -106,8 +111,8 @@ const NewPostInput = (props) => {
   const NewRecipe = (props) => {
     const addRecipe = (recipeName, Ingredients, Instructions) => {
         let data = {
-            creator_id: props.email,
-            creator_name: props.name,
+            // creator_id: props.email,
+            // creator_name: props.name,
             name: recipeName,
             ingredients: Ingredients,
             instructions: Instructions,

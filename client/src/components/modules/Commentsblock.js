@@ -16,27 +16,41 @@ import { NewComment } from "./NewRecipeInput";
  *
  * Proptypes
  * @param {ContentObject[]} comments
- * @param {ContentObject} story
+ * @param {ContentObject} recipe
  */
  const CommentsBlock = (props) => {
-    return (
-      <div className="Card-commentSection">
-        <div className="story-comments">
-          {props.comments.map((comment) => (
-            <SingleComment
-              key={`SingleComment_${comment._id}`}
-              _id={comment._id}
-              creator_name={comment.creator_name}
-              creator_id={comment.creator_id}
-              content={comment.content}
-            />
-          ))}
-          {props.userId && (
-            <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
-          )}
-        </div>
-      </div>
-    );
+  return(
+    <div>
+      {props.comments.map((comment) => (
+        <SingleComment 
+        parent={props.parent} 
+        creator_id={props.creator_id} 
+        creator_name={props.creator_name} 
+        rating={props.rating} 
+        hours ={props.hours} 
+        content={props.content}/>
+      ))};
+      <NewComment parent={props.parent}/>
+    </div>
+  );
+    // return (
+    //   <div className="Card-commentSection">
+    //     <div className="story-comments">
+    //       {props.comments.map((comment) => (
+    //         <SingleComment
+    //           key={`SingleComment_${comment._id}`}
+    //           _id={comment._id}
+    //           creator_name={comment.creator_name}
+    //           creator_id={comment.creator_id}
+    //           content={comment.content}
+    //         />
+    //       ))}
+    //       {props.userId && (
+    //         <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
+    //       )}
+    //     </div>
+    //   </div>
+    // );
   };
   
   export default CommentsBlock;

@@ -67,10 +67,10 @@ router.get("/recipes", (req, res) => {
   Recipe.find({}).then((recipe) => res.send(recipe))
 });
 
-router.post("/recipe", (req, res) => {
+router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({
-    creator_id: req.body.creator_id,
-    creator_name: req.body.creator_name,
+    creator_id: req.user.email,
+    creator_name: req.user.name,
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
@@ -87,7 +87,7 @@ router.get("/comment", (req, res) => {
 router.post("/comment", (req, res) => {
   const newComment = new Comment({
     creator_name: req.user.name,
-    creator_id: req.user._id,
+    creator_id: req.user.email,
     content: req.body.content,
     parent: req.body.parent,
     rating: req.body.rating,
