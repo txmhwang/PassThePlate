@@ -1,21 +1,20 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
-import { ChakraProvider } from '@chakra-ui/react'
+import { ChakraProvider } from "@chakra-ui/react";
+
 
 import App from "./components/App.js";
-
 
 // renders React Component "Root" into the DOM element with ID "root"
 const container = document.getElementById("root");
 const root = createRoot(container);
 root.render(
-  <ChakraProvider> 
+  <ChakraProvider>
     <BrowserRouter>
-        <App />
+      <App />
     </BrowserRouter>
   </ChakraProvider>
-
 );
 
 // allows for live updating
