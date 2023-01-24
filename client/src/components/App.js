@@ -10,8 +10,18 @@ import "../utilities.css";
 import Homepage from "./pages/Home.js";
 
 import { socket } from "../client-socket.js";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { get, post } from "../utilities";
+
+import {Fonts} from './Fonts'
+
+const theme = extendTheme({
+  fonts: {
+    heading: 'Open Sans',
+    body: 'Raleway',
+  },
+})
 
 /**
  * Define the "App" component
@@ -44,15 +54,19 @@ const App = () => {
   };
 
   return (
-    <Routes>
-      <Route
-        path="/"
-        element={
-          <Homepage />
-        }
-      />
-      <Route path="*" element={<NotFound />} />
-    </Routes>
+    <ChakraProvider theme={theme}>
+      <Fonts />
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Homepage/>
+          }
+        />
+        <Route path="*" element={<NotFound />} />
+      </Routes>
+    </ChakraProvider>
+
   );
 };
 
