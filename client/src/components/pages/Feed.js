@@ -16,6 +16,12 @@ const Feed = () => {
       })
     }, []);
 
+    // this gets called when the user pushes "Submit", so their
+    // post gets added to the screen right away
+    const addNewRecipe = (RecipeObj) => {
+      setRecipes([RecipeObj].concat(recipes));
+    };
+
     let recipesList = null;
     if(recipes.length === 0) {
       recipesList = <div> No Recipes! </div>
@@ -25,9 +31,7 @@ const Feed = () => {
       });
     }
   
-    // this gets called when the user pushes "Submit", so their
-    // post gets added to the screen right away
-    // const addNewStory = 
+    
     return ( 
       <div>
         <NewRecipe/>

@@ -7,8 +7,8 @@ import { Link } from "react-router-dom";
  * @param {string} creator_id
  * @param {string} creator_name
  * @param {string} name
- * @param {[{name: String, quantity: Number, unit: String}]} ingredients
- * @param {[string]} instructions
+ * @param {string} ingredients
+ * @param {string} instructions
  */
 
 const SingleRecipe = (props) => {

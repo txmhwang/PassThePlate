@@ -13,28 +13,37 @@ import { post } from "../../utilities.js";
 
  * @param {({recipe_id, recipeName, Ingredients, Instructions}) => void} onSubmit: (function) triggered when this post is submitted, takes {recipe_id, recipeName, ingredients, instructions} as parameters
  */
+ const initialValues = {
+  recipeName: "",
+  Ingredients: "",
+  Instructions: "",
+};
 
 const NewPostInput = (props) => {
-    const [recipeName, setRecipeName] = useState("");
-    // const [value, setValue] = useState("");
-    const [Ingredients, setIngredients] = useState([]);
-    const [Instructions, setInstructions] = useState([]);
+    const [values, setValues] = useState(initialValues);
+    // const [recipeName, setRecipeName] = useState("");
+    // // const [value, setValue] = useState("");
+    // const [Ingredients, setIngredients] = useState([]);
+    // const [Instructions, setInstructions] = useState([]);
   
     // called whenever the user types in the new post input box
     const handleChange = (event) => {
-      setRecipeName(event.target.recipeName);
-      setIngredients(event.target.Ingredients);
-      setInstructions(event.target.Instructions);
+      const { name, value } = event.target;
+      setValues({
+        ...values,
+        [name]: value,
+      });
     //   setValue(event.target.value);
     };
   
     // called when the user hits "Submit" for a new post
     const handleSubmit = (event) => {
       event.preventDefault();
-      props.onSubmit && props.onSubmit({recipeName, Ingredients, Instructions});
-      setRecipeName("");
-      setIngredients("");
-      setInstructions("");
+      props.onSubmit && props.onSubmit(values);
+      setValues(initialValues);
+      // setRecipeName("");
+      // setIngredients("");
+      // setInstructions("");
       //   setValue("");
     };
   
@@ -43,22 +52,26 @@ const NewPostInput = (props) => {
         <input
           type="text"
           placeholder={"Name of Recipe"}
-          value={recipeName}
+          value={values.recipeName}
           onChange={handleChange}
+          name="recipeName"
           className="NewPostInput-name"
+
         />
         <input
           type="text"
           placeholder={"Ingredients list"}
-          value={Ingredients}
+          value={values.Ingredients}
           onChange={handleChange}
+          name="Ingredients"
           className="NewPostInput-ingredients"
         />
         <input
           type="text"
           placeholder={"instructions list"}
-          value={Instructions}
+          value={values.Instructions}
           onChange={handleChange}
+          name="Instructions"
           className="NewPostInput-instructions"
         />
         <button
@@ -95,10 +108,13 @@ const NewPostInput = (props) => {
         rating: Rating, 
         hours: Hours
       };
-    post("/api/comments", body);
-    };
-    return <NewPostInput defaultText="New Comment" onSubmit={addComment} />;
+    post("/api/comments", body).then((comment) => {
+      // display this comment on the screen
+      props.addNewComment(comment);
+    });
   };
+  return <NewPostInput defaultText="New Comment" onSubmit={addComment} />;
+};
   
     
 
@@ -110,16 +126,24 @@ const NewPostInput = (props) => {
    */
   const NewRecipe = (props) => {
     const addRecipe = (recipeName, Ingredients, Instructions) => {
-        let data = {
+        const body = {
             // creator_id: props.email,
             // creator_name: props.name,
             name: recipeName,
             ingredients: Ingredients,
             instructions: Instructions,
         };
-        post("/api/recipe", data).then((recipe) => console.log(recipe));
-    }
-    return <NewPostInput onSubmit={addRecipe}/>
+        post("/api/recipes", body).then((recipe) => {
+          // display this recipe on the screen
+          props.addNewRecipe(recipe);
+        });
+    };
+    return (
+      <div>
+        <h2> New Recipe </h2>
+        <NewPostInput onSubmit={addRecipe}/>
+      </div>
+    );
   };
   
   export { NewComment, NewRecipe };

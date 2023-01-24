@@ -13,4 +13,4 @@ const CommentSchema = new mongoose.Schema({
 });
 
 // compile model from schema
-module.exports = mongoose.model("recipe", CommentSchema);
+module.exports = mongoose.model("comment", CommentSchema);
