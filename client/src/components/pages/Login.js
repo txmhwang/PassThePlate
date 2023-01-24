@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Flex, Text, Heading, Input, InputGroup, Stack, InputRightElement, Button, VStack, useEditableState, Center } from "@chakra-ui/react";
 import Nav from "../modules/NavBar";
 import { useNavigate } from 'react-router-dom';
+import { get, post} from "../../utilities";
 
 const LoginPage = () => {
     const [show, setShow] = useState(false);
@@ -35,7 +36,9 @@ const LoginPage = () => {
             // We also need to check if this email already exists in the database.
             console.log(loginEmail);
             console.log(loginPass);
-            navigator("/");
+
+            get("/api/users").then((users) => console.log(users));
+            // navigator("/");
         }
         else {
             setLoginError(true);
@@ -56,6 +59,12 @@ const LoginPage = () => {
             setSignupError(true);
             setSignupErrorMessage("Some parameters are not filled.");
         }
+        else {
+            // name, googleid, email, password
+            let data = {name: firstName + " " + lastName, googleid: 1, email: signupEmail, password: signupPass};
+            post("/api/createUser", data).then((user) => console.log(user));
+        }
+
     }
 
     return (
