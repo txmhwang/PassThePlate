@@ -3,11 +3,20 @@
   "version": "1.0.0",
   "description": "",
   "main": "server/server.js",
+  // "scripts": {
+  //   "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5050",
+  //   "start": "nodemon --ignore client/",
+  //   "build": "webpack"
+  // },
   "scripts": {
-    "hotloader": "webpack serve --config ./webpack.config.js --mode development --port 5050",
-    "start": "nodemon --ignore client/",
-    "build": "webpack"
+    "dev": "react-scripts start",
+    "start": "serve -s build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject",
+    "heroku-postbuild": "npm run build"
   },
+
   "repository": {
     "type": "git",
     "url": ""
@@ -36,6 +45,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.7.0",
+    "serve": "^14.1.2",
     "socket.io": "^2.3.0",
     "socket.io-client": "^2.3.1",
     "url-loader": "^4.1.1"
