@@ -11,7 +11,8 @@ const express = require("express");
 
 // import models so we can interact with the database
 const User = require("./models/user");
-const Recipe = requires("./models/recipe");
+const Recipe = require("./models/Recipe");
+const Comment = require("./models/Comment");
 
 // import authentication library
 const auth = require("./auth");
@@ -21,6 +22,7 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -60,6 +62,40 @@ router.post("/createUser", (req, res) => {
   })
   newUser.save().then((user) => res.send(user));
 })
+
+router.get("/recipes", (req, res) => {
+  Recipe.find({}).then((recipe) => res.send(recipe))
+});
+
+router.post("/recipe", (req, res) => {
+  const newRecipe = new Recipe({
+    creator_id: req.body.creator_id,
+    creator_name: req.body.creator_name,
+    name: req.body.name,
+    ingredients: req.body.ingredients,
+    instructions: req.body.instructions,
+  });
+  newRecipe.save().then((recipe) => res.send(recipe));
+});
+
+router.get("/comment", (req, res) => {
+  Comment.find({ parent: req.query.parent }).then((comments) => {
+    res.send(comments);
+  });
+});
+
+router.post("/comment", (req, res) => {
+  const newComment = new Comment({
+    creator_name: req.user.name,
+    creator_id: req.user._id,
+    content: req.body.content,
+    parent: req.body.parent,
+    rating: req.body.rating,
+    hours: req.body.hours,
+  });
+
+  newComment.save().then((comment) => res.send(comment));
+});
 
 // |------------------------------|
 // | write your API methods below!|

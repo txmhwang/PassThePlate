@@ -6,48 +6,60 @@ import { post } from "../../utilities.js";
  * New Recipe is a parent component for all input components
  *
  * Proptypes
- * @param {string} recipe_id
- * @param {string} creator_id
- * @param {string} creator_name
- * @param {string} name
- * @param {{name: String, quantity: Number, unit: String}} ingredients
- * @param {[string]} instructions
-//  * @param {boolean} public
- * @param {[string]} comments
- * @param {string} picture (optional)
- * 
- * 
- * 
- * 
- * @param {string} defaultText is the placeholder text
- * @param {string} storyId optional prop, used for comments
- * @param {({storyId, value}) => void} onSubmit: (function) triggered when this post is submitted, takes {storyId, value} as parameters
+ * @param {string} recipe_id for comments
+ * @param {string} recipeName_default
+ * @param {{name: String, quantity: Number, unit: String}} ingredients_default
+ * @param {[string]} instructions_default
+
+ * @param {({recipe_id, recipeName, Ingredients, Instructions}) => void} onSubmit: (function) triggered when this post is submitted, takes {recipe_id, recipeName, ingredients, instructions} as parameters
  */
 
-
- const NewRecipeInput = (props) => {
-    const [value, setValue] = useState("");
+const NewPostInput = (props) => {
+    const [recipeName, setRecipeName] = useState("");
+    // const [value, setValue] = useState("");
+    const [Ingredients, setIngredients] = useState([]);
+    const [Instructions, setInstructions] = useState([]);
   
     // called whenever the user types in the new post input box
     const handleChange = (event) => {
-      setValue(event.target.value);
+      setRecipeName(event.target.recipeName);
+      setIngredients(event.target.Ingredients);
+      setInstructions(event.target.Instructions);
+    //   setValue(event.target.value);
     };
   
     // called when the user hits "Submit" for a new post
     const handleSubmit = (event) => {
       event.preventDefault();
-      props.onSubmit && props.onSubmit(value);
-      setValue("");
+      props.onSubmit && props.onSubmit({recipeName, Ingredients, Instructions});
+      setRecipeName("");
+      setIngredients("");
+      setInstructions("");
+      //   setValue("");
     };
   
     return (
       <div className="u-flex">
         <input
           type="text"
-          placeholder={props.defaultText}
-          value={value}
+          placeholder={"Name of Recipe"}
+          value={recipeName}
           onChange={handleChange}
-          className="NewPostInput-input"
+          className="NewPostInput-name"
+        />
+        <input
+          type="text"
+          placeholder={"Ingredients list"}
+          value={Ingredients}
+          onChange={handleChange}
+          className="NewPostInput-ingredients"
+        />
+        <input
+          type="text"
+          placeholder={"instructions list"}
+          value={Instructions}
+          onChange={handleChange}
+          className="NewPostInput-instructions"
         />
         <button
           type="submit"
@@ -61,39 +73,30 @@ import { post } from "../../utilities.js";
     );
   };
 
-
-
   
   /**
    * New Comment is a New Post component for comments
    *
    * Proptypes
-   *  @param {string} comment_id
- * @param {string} creator_id
- * @param {string} creator_name
- * @param {string} content
- * @param {number} rating
- * @param {number} hours
-//  * @param {boolean} helpful
- * @param {string} picture (optional)
-
 
 
    * @param {string} defaultText is the placeholder text
    * @param {string} storyId to add comment to
    */
+//  * @param {string} parent
+
   const NewComment = (props) => {
-    const addComment = (value) => {
-      const body = { parent: props.storyId, content: value };
-      post("/api/comment", body).then((comment) => {
+    const addComment = (Content, Rating, Hours) => {
+      const body = {creator_id: props.creator_id, creator_name: props.creator_name, parent: props.recipe_id, content: Content, rating: Rating, hours: Hours};
+      post("/api/comments", body).then((comment) => {
         // display this comment on the screen
         props.addNewComment(comment);
       });
     };
   
-    return <NewRecipeInput defaultText="New Comment" onSubmit={addComment} />;
+    return <NewPostInput defaultText="New Comment" onSubmit={addComment} />;
   };
-  
+
   /**
    * New Story is a New Post component for comments
    *
@@ -101,16 +104,17 @@ import { post } from "../../utilities.js";
    * @param {string} defaultText is the placeholder text
    */
   const NewRecipe = (props) => {
-    const addRecipe = (value) => {
-      const body = { content: value };
-      post("/api/story", body).then((story) => {
-        // display this story on the screen
-        props.addNewStory(story);
-      });
-    };
-  
-    return <NewPostInput defaultText="New Story" onSubmit={addRecipe} />;
+    const addRecipe = (recipeName, Ingredients, Instructions) => {
+        let data = {
+            creator_id: props.email,
+            creator_name: props.name,
+            name: recipeName,
+            ingredients: Ingredients,
+            instructions: Instructions,
+        };
+        post("/api/recipe", data).then((recipe) => console.log(recipe));
+    }
+    return <NewPostInput onSubmit={addRecipe}/>
   };
   
   export { NewComment, NewRecipe };
-  
