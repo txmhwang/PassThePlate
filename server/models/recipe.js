@@ -2,7 +2,9 @@ const mongoose = require("mongoose");
 
 //define a story schema for the database
 const RecipeSchema = new mongoose.Schema({
-  _id: String,
+  recipe_id: String,
+  creator_id: String,
+  creator_name: String,
   name: String,
   ingredients: {name: String, quantity: Number, unit: String},
   instructions: [String],
