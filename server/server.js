@@ -36,9 +36,7 @@ const socketManager = require("./server-socket");
 
 // Server configuration below
 // TODO change connection URL after setting up your team database
-// const mongoConnectionURL = "mongodb+srv://PassThePlateDB:TlEbAO1Qvgs2Sxt6@passtheplate.l77op5m.mongodb.net/test";
-const mongoConnectionURL = process.env.ATLAS_SRV
-// const mongoConnectionURL="mongodb+srv://admin:yRCeY2dpUn8yZVcq@cluster0.gy40j53.mongodb.net/?retryWrites=true&w=majority";
+const mongoConnectionURL = process.env.ATLAS_SRV;
 // TODO change database name to the name you chose
 const databaseName = "PassThePlateDB";
 
@@ -62,7 +60,6 @@ app.use(express.json());
 // set up a session, which will persist login data across requests
 app.use(
   session({
-    // TODO: add a SESSION_SECRET string in your .env file, and replace the secret with process.env.SESSION_SECRET
     secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
