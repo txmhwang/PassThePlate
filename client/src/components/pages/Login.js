@@ -3,6 +3,7 @@ import { useState } from "react";
 import { Flex, Text, Heading, Input, InputGroup, Stack, InputRightElement, Button, VStack, useEditableState, Center } from "@chakra-ui/react";
 import Nav from "../modules/NavBar";
 import { useNavigate } from 'react-router-dom';
+import { get, post} from "../../utilities";
 
 const LoginPage = () => {
     const [show, setShow] = useState(false);
@@ -33,9 +34,21 @@ const LoginPage = () => {
         // TODO: We are going to validate whether or not the user exists within our database. If it is we go back to the homepage
         if (loginEmail.includes("@")) {
             // We also need to check if this email already exists in the database.
-            console.log(loginEmail);
-            console.log(loginPass);
-            navigator("/");
+            let data = {email: loginEmail, password: loginPass};
+
+            get("/api/findUser", data).then((user) => {
+            // this means we found a singular user
+            if (user.length === 1) {
+                navigator("/");
+            }
+            else {
+                // this means either its the wrong password
+                setLoginError(true);
+                setLoginErrorMessage("Wrong email or password")
+            }
+            
+            });
+            // navigator("/");
         }
         else {
             setLoginError(true);
@@ -56,6 +69,12 @@ const LoginPage = () => {
             setSignupError(true);
             setSignupErrorMessage("Some parameters are not filled.");
         }
+        else {
+            // name, googleid, email, password
+            let data = {name: firstName + " " + lastName, googleid: 1, email: signupEmail, password: signupPass};
+            post("/api/createUser", data).then((user) => console.log(user));
+        }
+
     }
 
     return (
