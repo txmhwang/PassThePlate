@@ -33,14 +33,14 @@ export default function Nav({loggedIn}) {
           <Flex alignItems={'center'}>
             <Stack direction={'row'} spacing={7}>
                 {/* THE FEED LINK */}
-                <Link as={ReachLink} to="/Feed">
+                <Link as={ReachLink} to="/feed">
                     <Text fontWeight={"bold"}>
                         Feed
                     </Text>
                 </Link>
 
                 {/* THE EXPLORE LINK */}
-                <Link as={ReachLink} to="/Explore">
+                <Link as={ReachLink} to="/explore">
                     <Text fontWeight={"bold"}>
                         Explore
                     </Text>

@@ -8,6 +8,7 @@ import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
 import Homepage from "./pages/Home.js";
+import LoginPage from "./pages/Login.js";
 
 import { socket } from "../client-socket.js";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -64,6 +65,7 @@ const App = () => {
           }
         />
         <Route path="*" element={<NotFound />} />
+        <Route path="/login" element={<LoginPage />}/>
       </Routes>
     </ChakraProvider>
 
