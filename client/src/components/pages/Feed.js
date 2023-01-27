@@ -2,10 +2,12 @@ import React, { useState, useEffect } from "react";
 import Card from "../modules/Card";
 import { NewRecipe } from "../modules/NewRecipeInput";
 import SingleRecipe from "../modules/SingleRecipe";
+import Popup from "../modules/Popup";
+import NavBar from "../modules/NavBar";
 
 import { get } from "../../utilities";
 
-const Feed = () => {
+const Feed = (props) => {
     const [recipes, setRecipes] = useState([]);
   
     // called when the "Feed" component "mounts", i.e.
@@ -27,19 +29,25 @@ const Feed = () => {
       recipesList = <div> No Recipes! </div>
     } else {
       recipesList = recipes.map((RecipeObj) => {
-        return <SingleRecipe 
-        // creator_id={RecipeObj.creator_id} 
-        // creator_name={RecipeObj.creator_name} 
-        name={RecipeObj.name} 
-        ingredients={RecipeObj.ingredients} 
-        instructions={RecipeObj.instructions}/>
+        return <Card
+        recipe_id = {RecipeObj.recipe_id}
+        creator_id = {RecipeObj.creator_id}
+        creator_name ={RecipeObj.creator_name}
+        name = {RecipeObj.name}
+        userId = {props.userId}
+        ingredients = {RecipeObj.ingredients}
+        instructions = {RecipeObj.instructions}/>
       });
     }
-  
     
-    return ( 
+    return (
       <div>
-        <NewRecipe addNewRecipe={addNewRecipe}/>
+        <NavBar />
+        <div className="u-toppad" >
+          <Popup/>
+        </div>
+        
+        {/* {props.userId && <NewRecipe addNewRecipe={addNewRecipe} />} */}
         {recipesList}
       </div>
     );

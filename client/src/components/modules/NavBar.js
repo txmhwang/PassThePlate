@@ -25,7 +25,10 @@ export default function Nav({loggedIn}) {
     <>
       <Box bg={useColorModeValue('whiteAlpha.100', 'whiteAlpha.900')} px={4}>
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
-          <Box>Logo</Box>
+          {/* <Box>Logo</Box> */}
+          <a href="/" >
+            <img src="../../public/logo" />
+          </a>
 
 
           <Flex alignItems={'center'}>

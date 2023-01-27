@@ -1,0 +1,9 @@
+.Card-container {
+    margin: var(--l);
+    padding: var(--l);
+    width: 40%;
+    height: auto;
+    outline: 1px solid black;
+    border-radius: 35px;
+    float: left
+}

@@ -1,0 +1,10 @@
+.NewPostInputContainer {
+    flex-direction: column;
+    align-items: stretch;
+}
+
+.NewPostInput {
+    display: flex;
+    flex-grow: 1;
+
+}

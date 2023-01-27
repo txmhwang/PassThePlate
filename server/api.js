@@ -69,14 +69,21 @@ router.get("/recipes", (req, res) => {
 
 router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({
-    // creator_id: req.user.email,
-    // creator_name: req.user.name,
+    creator_id: req.body.email,
+    creator_name: req.body.name,
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
+    // public: req.body.puclic,
   });
   newRecipe.save().then((recipe) => res.send(recipe));
 });
+
+// router.get("/publicrecipes", (req,res) => {
+//   Recipe.find({public: True}).then((recipes) =>{
+//     res.send(recipes);
+//   });
+// });
 
 router.get("/comment", (req, res) => {
   Comment.find({ parent: req.query.parent }).then((comments) => {
@@ -86,8 +93,8 @@ router.get("/comment", (req, res) => {
 
 router.post("/comment", (req, res) => {
   const newComment = new Comment({
-    // creator_name: req.user.name,
-    // creator_id: req.user.email,
+    creator_name: req.body.name,
+    creator_id: req.body.email,
     content: req.body.content,
     parent: req.body.parent,
     rating: req.body.rating,

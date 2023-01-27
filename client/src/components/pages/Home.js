@@ -15,8 +15,10 @@ const Homepage = () => {
                 </Heading>
                 
                 {/* The button here will create a pop-up window and asks the users to input a recipe */}
-                <Popup />
             </Flex>
+            <div>
+                <Popup/>
+            </div>
         </>
     )
 }

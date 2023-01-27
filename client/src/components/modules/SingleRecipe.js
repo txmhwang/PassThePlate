@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 
 /**
  * Proptypes
+ * @param {string} recipe_id
  * @param {string} creator_id
  * @param {string} creator_name
  * @param {string} name
@@ -13,19 +14,20 @@ import { Link } from "react-router-dom";
 
 const SingleRecipe = (props) => {
     return (
-        <div className="RecipeContainer">
+        <div className="Card-recipe u-text">
             <div className="CreatorContainer">
-                {/* <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
+                <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
                     {props.creator_name}
-                </Link> */}
-                <h2 className="recipe-name">
+                </Link>
+                <h2>
                     {props.name}
                 </h2>
+                <hr />
                 {/* <img src={props.picture}/> */}
-                <h3 className="recipelabels"> Ingredients </h3>
-                <p className="recipe-content"> {props.ingredients} </p>
-                <h3 className="recipelabels"> Instructions </h3>
-                <p className="recipe-content"> {props.instructions} </p>
+                <h3 className="u-bold"> INGREDIENTS </h3>
+                <p className="u-text"> {props.ingredients} </p>
+                <h3 className="u-bold"> INSTRUCTIONS </h3>
+                <p className="u-text"> {props.instructions} </p>
             </div>
         </div>
 
