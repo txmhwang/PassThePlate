@@ -80,7 +80,6 @@ const LoginPage = () => {
 
     return (
         <>
-            <Nav />
             <Flex h="container.sm" alignItems={"center"} justifyContent="center" direction={"row"}>
                 <Flex p={"36"} direction={"column"}>
                     <Stack spacing={4}>

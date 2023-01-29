@@ -46,7 +46,6 @@ const Feed = (props) => {
     
     return (
       <div>
-        <NavBar />
         <div className="u-toppad" >
           <Popup/>
         </div>

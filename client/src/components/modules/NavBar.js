@@ -19,7 +19,7 @@ import {
 import { Link as ReachLink, useNavigate } from 'react-router-dom';
 import Logo from "../../public/logo.png";
 
-export default function Nav({loggedIn}) {
+export default function Nav({userId, handleLogin, handleLogout}) {
   
     const [login, setLogin] = useState(false);
     let navigate = useNavigate();
@@ -49,6 +49,10 @@ export default function Nav({loggedIn}) {
                     <Text fontWeight={"bold"}>
                         Explore
                     </Text>
+                </Link>
+
+                <Link>
+                
                 </Link>
 
               <Menu>

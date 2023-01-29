@@ -17,6 +17,7 @@ import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import { get, post } from "../utilities";
 
 import {Fonts} from './Fonts'
+import NavBar from './modules/NavBar';
 
 const theme = extendTheme({
   fonts: {
@@ -58,6 +59,7 @@ const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId}/>
       <Routes>
         <Route
           path="/"
