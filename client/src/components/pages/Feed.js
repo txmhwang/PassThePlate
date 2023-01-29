@@ -3,7 +3,6 @@ import Card from "../modules/Card";
 import { NewRecipe } from "../modules/NewRecipeInput";
 import SingleRecipe from "../modules/SingleRecipe";
 import Popup from "../modules/Popup";
-import NavBar from "../modules/NavBar";
 
 import { get } from "../../utilities";
 
@@ -29,17 +28,17 @@ const Feed = (props) => {
       recipesList = <div> No Recipes! </div>
     } else {
       recipesList = recipes.map((RecipeObj) => {
-        return <card
-        recipe_name = {RecipeObj.name}
-        creator_name = {RecipeObj.creator_name}
-        picture = {RecipeObj.picture}
-        // recipe_id = {RecipeObj.recipe_id}
-        // creator_id = {RecipeObj.creator_id}
-        // creator_name ={RecipeObj.creator_name}
-        // name = {RecipeObj.name}
-        // userId = {props.userId}
-        // ingredients = {RecipeObj.ingredients}
-        // instructions = {RecipeObj.instructions}
+        return <Card
+        // recipe_name = {RecipeObj.name}
+        // creator_name = {RecipeObj.creator_name}
+        // picture = {RecipeObj.picture}
+        recipe_id = {RecipeObj.recipe_id}
+        creator_id = {RecipeObj.creator_id}
+        creator_name ={RecipeObj.creator_name}
+        name = {RecipeObj.name}
+        userId = {props.userId}
+        ingredients = {RecipeObj.ingredients}
+        instructions = {RecipeObj.instructions}
         />
       });
     }
