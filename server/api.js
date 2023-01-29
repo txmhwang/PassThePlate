@@ -59,7 +59,7 @@ router.post("/createUser", (req, res) => {
     saved_recipes: [],
     email: req.body.email,
     password: req.body.password,
-    pfp: req.body.pfp,
+    // pfp: req.body.pfp,
   })
   newUser.save().then((user) => res.send(user));
 })
@@ -76,7 +76,7 @@ router.post("/recipes", (req, res) => {
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
     public: req.body.puclic,
-    picture: req.body.pictures,
+    // picture: req.body.pictures,
   });
   newRecipe.save().then((recipe) => res.send(recipe));
 });

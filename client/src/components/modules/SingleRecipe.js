@@ -1,7 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
-
+import pfp from "../../public/profile.png";
+import food from "../../public/food.jpg";
+import RecipePopup from "./RecipePopup";
+import PostHeader from "./PostHeader";
 
 /**
  * Proptypes
@@ -17,21 +20,23 @@ const SingleRecipe = (props) => {
 
     return (
         <div className="Card-recipe u-text">
-            <div className="CreatorContainer">
-                <img src=""/>
-                <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
-                    {props.creator_name}
-                </Link>
-                <h2>
-                    {props.name}
-                </h2>
-                <hr />
-                {/* <img src={props.picture}/> */}
-                <h3 className="u-bold"> INGREDIENTS </h3>
-                <p className="u-text"> {props.ingredients} </p>
-                <h3 className="u-bold"> INSTRUCTIONS </h3>
-                <p className="u-text"> {props.instructions} </p>
+            <PostHeader 
+            creator_id={props.creator_id}
+            creator_name ={props.creator_name}
+            />
+            <h2>
+                {props.name}
+            </h2>
+            <div>
+                <RecipePopup 
+                name = {props.name}
+                ingredients = {props.ingredients}
+                instructions = {props.instructions}
+                creator_id = {props.creator_id}
+                creator_name={props.creator_name}
+                />
             </div>
+            
         </div>
 
     );

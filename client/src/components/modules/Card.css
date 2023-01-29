@@ -7,3 +7,50 @@
     border-radius: 35px;
     float: left
 }
+
+.Card-CreatorContainer {
+    display: flex;
+}
+
+.Card-pfp{
+    width: 40px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+}
+
+.Card-user{
+    display: flex;
+    padding: var(--s) var(--m) ;
+
+}
+.Card-RecipePopup {
+    padding-top: 24px;
+    display: flex;
+    justify-content: center;
+    font-size: 64px;
+    
+}
+.Card-recipeImage {
+    max-width: 50%;
+    height: auto;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Card-RecipeBlock {
+    margin-left: auto;
+    margin-right: auto;
+}
+.Card-RecipeLabels {
+    font-size: 24px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.Card-commentsblock {
+    padding: 24px;
+    display: flex;
+    justify-content: center;
+}
+.Popup-creator-container {
+    padding: 32px;
+}

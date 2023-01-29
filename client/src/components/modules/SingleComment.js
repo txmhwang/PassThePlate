@@ -25,6 +25,7 @@ const SingleComment = (props) => {
                 </div>
                 <p className="commentContent-container">{props.content}</p>
             </div>
+            <hr/>
         </div>
 
     );
