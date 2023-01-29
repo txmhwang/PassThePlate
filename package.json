@@ -8,7 +8,6 @@
     "start": "nodemon --ignore client/",
     "build": "webpack"
   },
-
   "repository": {
     "type": "git",
     "url": ""

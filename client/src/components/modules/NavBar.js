@@ -13,9 +13,11 @@ import {
   useColorModeValue,
   Stack,
   Center,
-  Text
+  Text,
+  Image
 } from '@chakra-ui/react';
 import { Link as ReachLink, useNavigate } from 'react-router-dom';
+import Logo from "../../public/logo.png";
 
 export default function Nav({loggedIn}) {
   
@@ -23,12 +25,12 @@ export default function Nav({loggedIn}) {
     let navigate = useNavigate();
   return (
     <>
-      <Box bg={useColorModeValue('whiteAlpha.100', 'whiteAlpha.900')} px={4}>
+      <Box bg={useColorModeValue('whiteAlpha.100', 'whiteAlpha.900')} px={4}> {/* */}
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           {/* <Box>Logo</Box> */}
-          <a href="/" >
-            <img src="../../public/logo" />
-          </a>
+          <Box boxSize={"50px"}> 
+            <Image src={Logo}/>
+          </Box>
 
 
           <Flex alignItems={'center'}>
