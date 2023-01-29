@@ -29,14 +29,18 @@ const Feed = (props) => {
       recipesList = <div> No Recipes! </div>
     } else {
       recipesList = recipes.map((RecipeObj) => {
-        return <Card
-        recipe_id = {RecipeObj.recipe_id}
-        creator_id = {RecipeObj.creator_id}
-        creator_name ={RecipeObj.creator_name}
-        name = {RecipeObj.name}
-        userId = {props.userId}
-        ingredients = {RecipeObj.ingredients}
-        instructions = {RecipeObj.instructions}/>
+        return <card
+        recipe_name = {RecipeObj.name}
+        creator_name = {RecipeObj.creator_name}
+        picture = {RecipeObj.picture}
+        // recipe_id = {RecipeObj.recipe_id}
+        // creator_id = {RecipeObj.creator_id}
+        // creator_name ={RecipeObj.creator_name}
+        // name = {RecipeObj.name}
+        // userId = {props.userId}
+        // ingredients = {RecipeObj.ingredients}
+        // instructions = {RecipeObj.instructions}
+        />
       });
     }
     

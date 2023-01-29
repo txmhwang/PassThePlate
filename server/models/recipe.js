@@ -11,7 +11,7 @@ const RecipeSchema = new mongoose.Schema({
   // ingredients: {name: String, quantity: Number, unit: String},
   // instructions: [String],
   public: Boolean,
-  // pictures: String,
+  picture: String,
 });
 
 // compile model from schema

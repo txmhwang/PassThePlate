@@ -59,6 +59,7 @@ router.post("/createUser", (req, res) => {
     saved_recipes: [],
     email: req.body.email,
     password: req.body.password,
+    pfp: req.body.pfp,
   })
   newUser.save().then((user) => res.send(user));
 })
@@ -74,16 +75,17 @@ router.post("/recipes", (req, res) => {
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
-    // public: req.body.puclic,
+    public: req.body.puclic,
+    picture: req.body.pictures,
   });
   newRecipe.save().then((recipe) => res.send(recipe));
 });
 
-// router.get("/publicrecipes", (req,res) => {
-//   Recipe.find({public: True}).then((recipes) =>{
-//     res.send(recipes);
-//   });
-// });
+router.get("/publicrecipes", (req,res) => {
+  Recipe.find({public: True}).then((recipes) =>{
+    res.send(recipes);
+  });
+});
 
 router.get("/comment", (req, res) => {
   Comment.find({ parent: req.query.parent }).then((comments) => {
@@ -103,10 +105,6 @@ router.post("/comment", (req, res) => {
 
   newComment.save().then((comment) => res.send(comment));
 });
-
-// |------------------------------|
-// | write your API methods below!|
-// |------------------------------|
 
 // anything else falls to this "not found" case
 router.all("*", (req, res) => {

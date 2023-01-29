@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import { useState, useEffect } from "react";
 
 
 /**
@@ -13,9 +14,11 @@ import { Link } from "react-router-dom";
  */
 
 const SingleRecipe = (props) => {
+
     return (
         <div className="Card-recipe u-text">
             <div className="CreatorContainer">
+                <img src=""/>
                 <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
                     {props.creator_name}
                 </Link>

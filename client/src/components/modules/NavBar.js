@@ -29,7 +29,9 @@ export default function Nav({loggedIn}) {
         <Flex h={16} alignItems={'center'} justifyContent={'space-between'}>
           {/* <Box>Logo</Box> */}
           <Box boxSize={"50px"}> 
-            <Image src={Logo}/>
+            <a href="/">
+              <Image src={Logo}/>
+            </a>
           </Box>
 
 
@@ -60,7 +62,7 @@ export default function Nav({loggedIn}) {
                   
                   <Avatar
                       size={'sm'}
-                      src={'https://avatars.dicebear.com/api/male/username.svg'}
+                      src={'../../public/profile.png'}
                   />
 
                   </MenuButton>

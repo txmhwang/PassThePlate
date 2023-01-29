@@ -8,6 +8,7 @@ const UserSchema = new mongoose.Schema({
   saved_recipes: [String],
   email: String,
   password: String,
+  pfp: String,
 });
 
 // compile model from schema
