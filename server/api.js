@@ -81,8 +81,8 @@ router.post("/recipes", (req, res) => {
   newRecipe.save().then((recipe) => res.send(recipe));
 });
 
-router.get("/publicrecipes", (req,res) => {
-  Recipe.find({public: True}).then((recipes) =>{
+router.get("/publicrecipes", (req, res) => {
+  Recipe.find({public: true}).then((recipes) =>{
     res.send(recipes);
   });
 });

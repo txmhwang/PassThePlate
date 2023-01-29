@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { post } from "../../utilities.js";
+import { Checkbox, CheckboxGroup, Textarea } from '@chakra-ui/react';
 
 import "./NewRecipeInput.css";
 /**
@@ -17,6 +18,7 @@ import "./NewRecipeInput.css";
   recipeName: "",
   Ingredients: "",
   Instructions: "",
+  public: true,
 };
 
 const NewRecipeInput = (props) => {
@@ -49,7 +51,7 @@ const NewRecipeInput = (props) => {
           className="NewPostInput u-text"
 
         /> <br/>
-        <input
+        <Textarea
           type="text"
           placeholder={"Ingredients list"}
           value={values.Ingredients}
@@ -57,7 +59,7 @@ const NewRecipeInput = (props) => {
           name="Ingredients"
           className="NewPostInput u-text"
         /> <br/>
-        <input
+        <Textarea
           type="text"
           placeholder={"instructions list"}
           value={values.Instructions}
@@ -65,6 +67,11 @@ const NewRecipeInput = (props) => {
           name="Instructions"
           className="NewPostInput u-text"
         /> <br/>
+        <Checkbox defaultChecked
+          value={values.public}
+          // onChange={(e) => setValues.public(false)}
+          onChange={handleChange}
+        >Make recipe public</Checkbox>
         <button
           type="submit"
           className="NewPostInput-button u-pointer u-text"
@@ -92,6 +99,7 @@ const NewRecipeInput = (props) => {
             name: values.recipeName,
             ingredients: values.Ingredients,
             instructions: values.Instructions,
+            public: values.public,
         };
         post("/api/recipes", body).then((recipe) => {
           // display this recipe on the screen

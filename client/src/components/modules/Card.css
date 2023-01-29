@@ -1,12 +1,19 @@
 .Card-container {
+    display: flex;
+    flex-grow: 1;
+    flex-shrink: 1;
     margin: var(--l);
     padding: var(--l);
     width: 40%;
     height: auto;
     outline: 1px solid black;
     border-radius: 35px;
-    float: left
+    margin-left: auto;
+    margin-right: auto;
+
 }
+
+/* ------------------------------------------ CSS for Single Recipe ------------------------------------------------------- */
 
 .Card-CreatorContainer {
     display: flex;
@@ -24,6 +31,9 @@
     padding: var(--s) var(--m) ;
 
 }
+
+
+/* ------------------------------------------ CSS for Recipe Popup ------------------------------------------------------- */
 .Card-RecipePopup {
     padding-top: 24px;
     display: flex;
@@ -53,4 +63,11 @@
 }
 .Popup-creator-container {
     padding: 32px;
+}
+
+
+
+.Feed-popup{
+    display: flex;
+    justify-content: center;
 }

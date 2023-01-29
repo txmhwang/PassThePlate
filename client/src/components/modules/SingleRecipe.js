@@ -19,7 +19,7 @@ import PostHeader from "./PostHeader";
 const SingleRecipe = (props) => {
 
     return (
-        <div className="Card-recipe u-text">
+        <div>
             <PostHeader 
             creator_id={props.creator_id}
             creator_name ={props.creator_name}

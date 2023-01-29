@@ -28,12 +28,6 @@ const Popup = () => {
                 <NewRecipe />
             </ModalBody>
 
-            <ModalFooter>
-                {/* <Button colorScheme='blue' mr={3} onClick={onClose}>
-                Close
-                </Button> */}
-                {/* <Button variant='ghost'>Submit</Button> */}
-            </ModalFooter>
             </ModalContent>
         </Modal>
     </>

@@ -5,6 +5,7 @@ import SingleRecipe from "../modules/SingleRecipe";
 import Popup from "../modules/Popup";
 
 import { get } from "../../utilities";
+import "../modules/Feed.css";
 
 const Feed = (props) => {
     const [recipes, setRecipes] = useState([]);
@@ -29,9 +30,6 @@ const Feed = (props) => {
     } else {
       recipesList = recipes.map((RecipeObj) => {
         return <Card
-        // recipe_name = {RecipeObj.name}
-        // creator_name = {RecipeObj.creator_name}
-        // picture = {RecipeObj.picture}
         recipe_id = {RecipeObj.recipe_id}
         creator_id = {RecipeObj.creator_id}
         creator_name ={RecipeObj.creator_name}
@@ -39,18 +37,21 @@ const Feed = (props) => {
         userId = {props.userId}
         ingredients = {RecipeObj.ingredients}
         instructions = {RecipeObj.instructions}
+        public = {RecipeObj.public}
         />
       });
     }
     
     return (
       <div>
-        <div className="u-toppad" >
+        <div className="Feed-popup">
           <Popup/>
         </div>
-        
-        {/* {props.userId && <NewRecipe addNewRecipe={addNewRecipe} />} */}
-        {recipesList}
+        <div>
+          <div className="Feed-posts">
+            {recipesList}
+          </div>
+        </div>
       </div>
     );
   };

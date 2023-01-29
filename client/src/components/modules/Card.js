@@ -17,7 +17,6 @@ import "./Card.css";
  */
 
 const Card = (props) => {
-  
     return (
       <div className="Card-container">
 
@@ -28,6 +27,7 @@ const Card = (props) => {
           name = {props.name}
           ingredients = {props.ingredients}
           instructions = {props.instructions}
+          public ={props.public}
         />
         <hr/>
       </div>
