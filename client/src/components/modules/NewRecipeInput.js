@@ -137,7 +137,12 @@ const initialComment = {
   content: "",
   rating: "",
 };
-
+/**
+ * New Recipe is a New Post component for comments
+ *
+ * Proptypes
+ * @param {string} onSubmit
+ */
 const NewCommentInput = (props) => {
   const [values, setValues] = useState(initialComment);
 
@@ -204,17 +209,18 @@ const NewCommentInput = (props) => {
    *
    * Proptypes
 
-
    * @param {string} addNewComment is the fn to add comment to page
-   * @param {string} parent to add comment to
+   * @param {string} recipe_id to add comment to
+   * @param {string} creator_id
+   * @param {string} creator_name
    */
 //  * @param {string} parent
 
 const NewComment = (props) => {
   const addComment = (values) => {
     const body = {
-      // creator_id: props.creator_id,
-      // creator_name: props.creator_name,
+      creator_id: props.creator_id,
+      creator_name: props.creator_name,
       parent: props.recipe_id,
       content: values.content,
       rating: values.rating,

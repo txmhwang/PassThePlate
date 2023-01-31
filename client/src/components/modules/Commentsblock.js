@@ -11,7 +11,10 @@ import { NewComment } from "./NewRecipeInput";
  *
  * Proptypes
  * @param {ContentObject[]} comments
- * @param {ContentObject} recipe
+ * @param {string} recipe_id
+ * @param {string} creator_id
+ * @param {string} creator_name
+ * @param {ContentObject} addNewComment
  */
  const CommentsBlock = (props) => {
   return(
@@ -26,10 +29,15 @@ import { NewComment } from "./NewRecipeInput";
         hours ={comment.hours} 
         content={comment.content}/>
       ))};
-      {props.userId && (
+      {/* {props.userId && (
         <NewComment parent={props.recipe.recipe_id} addNewComment={props.addNewComment} />
-      )};
-      {/* <NewComment parent={props.parent} addNewComment={addNewComment} /> */}
+      )}; */}
+      <NewComment 
+      recipe_id={props.recipe_id} 
+      addNewComment={props.addNewComment} 
+      creator_id = {props.creator_id}
+      creator_name = {props.creator_name}
+      /> 
       </div>
     </div>
   );

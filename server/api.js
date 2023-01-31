@@ -65,8 +65,8 @@ router.get("/recipes", (req, res) => {
 
 router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({
-    creator_id: req.body.email,
-    creator_name: req.body.name,
+    creator_id: req.user._id,
+    creator_name: req.user.name,
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
@@ -89,8 +89,8 @@ router.get("/comment", (req, res) => {
 
 router.post("/comment", (req, res) => {
   const newComment = new Comment({
-    creator_name: req.body.name,
-    creator_id: req.body.email,
+    creator_name: req.user.name,
+    creator_id: req.user._id,
     content: req.body.content,
     parent: req.body.parent,
     rating: req.body.rating,

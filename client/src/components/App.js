@@ -33,7 +33,7 @@ const theme = extendTheme({
  */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
-  const [userName, setUserName] = useState("Anonymous");
+  const [userName, setUserName] = useState(undefined);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -57,6 +57,7 @@ const App = () => {
 
   const handleLogout = () => {
     setUserId(undefined);
+    setUserName(undefined)
     post("/api/logout");
   };
 
