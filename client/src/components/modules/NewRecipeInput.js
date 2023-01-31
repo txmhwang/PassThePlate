@@ -100,7 +100,7 @@ const NewRecipeInput = (props) => {
 const NewRecipe = (props) => {
   const addRecipe = (values) => {
     const body = {
-      creator_id: props.email,
+      creator_id: props._id,
       creator_name: props.name,
       name: values.recipeName,
       ingredients: values.Ingredients,
@@ -110,6 +110,7 @@ const NewRecipe = (props) => {
     post("/api/recipes", body).then((recipe) => {
       // display this recipe on the screen
       props.addNewRecipe(recipe);
+      props.your_recipes.concat(recipe);
     });
   };
   return (
