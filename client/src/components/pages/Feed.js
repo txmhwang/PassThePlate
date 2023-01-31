@@ -9,6 +9,7 @@ import "../modules/Feed.css";
 
 const Feed = (props) => {
   const [recipes, setRecipes] = useState([]);
+  const [user, setUser] = useState("");
 
   // this will now only show the recipes that the user has
   useEffect(() => {
