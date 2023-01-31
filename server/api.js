@@ -23,7 +23,6 @@ const router = express.Router();
 //initialize socket
 const socketManager = require("./server-socket");
 
-
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
 router.get("/whoami", (req, res) => {
@@ -44,11 +43,7 @@ router.post("/initsocket", (req, res) => {
 
 router.get("/users", (req, res) => {
   User.find({}).then((users) => res.send(users));
-})
-
-router.get("/findUser", (req, res) => {
-  User.find({email: req.query.email, password: req.query.password}).then((user) => res.send(user));
-})
+});
 
 router.post("/createUser", (req, res) => {
   const newUser = new User({
@@ -60,12 +55,12 @@ router.post("/createUser", (req, res) => {
     email: req.body.email,
     password: req.body.password,
     // pfp: req.body.pfp,
-  })
+  });
   newUser.save().then((user) => res.send(user));
-})
+});
 
 router.get("/recipes", (req, res) => {
-  Recipe.find({}).then((recipe) => res.send(recipe))
+  Recipe.find({}).then((recipe) => res.send(recipe));
 });
 
 router.post("/recipes", (req, res) => {
@@ -82,7 +77,7 @@ router.post("/recipes", (req, res) => {
 });
 
 router.get("/publicrecipes", (req, res) => {
-  Recipe.find({public: true}).then((recipes) =>{
+  Recipe.find({ public: true }).then((recipes) => {
     res.send(recipes);
   });
 });
@@ -111,7 +106,5 @@ router.all("*", (req, res) => {
   console.log(`API route not found: ${req.method} ${req.url}`);
   res.status(404).send({ msg: "API route not found" });
 });
-
-
 
 module.exports = router;

@@ -25,9 +25,7 @@ const ProfileButton = ({ handleLogout, navigate }) => {
   const [username, setUsername] = useState("");
 
   get("api/whoami").then((user) => {
-    console.log(user);
     setUsername(user["name"]);
-    console.log(username);
   });
   return (
     <Menu>

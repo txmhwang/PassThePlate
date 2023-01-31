@@ -66,7 +66,7 @@ const App = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/feed" element={<Feed />} />
+        <Route path="/feed" element={<Feed userId={userId} />} />
         <Route path="/explore" element={<Explore />} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
