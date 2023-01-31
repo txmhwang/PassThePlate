@@ -72,41 +72,32 @@ export default function Nav({ userId, handleLogin, handleLogout }) {
   let navigate = useNavigate();
   return (
     <>
-      <GoogleOAuthProvider clientId={GOOGLE_ID}>
-        <Box bg={useColorModeValue("whiteAlpha.100", "whiteAlpha.900")} px={4}>
-          {" "}
-          {/* */}
-          <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-            {/* <Box>Logo</Box> */}
-            <Box boxSize={"50px"}>
-              <a href="/">
-                <Image src={Logo} />
-              </a>
-            </Box>
+      <Box bg={useColorModeValue("whiteAlpha.100", "whiteAlpha.900")} px={4}>
+        {" "}
+        {/* */}
+        <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
+          {/* <Box>Logo</Box> */}
+          <Box boxSize={"50px"}>
+            <a href="/">
+              <Image src={Logo} />
+            </a>
+          </Box>
 
-            <Flex alignContent={"center"}>
-              <Stack direction={"row"} spacing={7} justifyContent={"center"}>
-                {/* THE FEED LINK */}
-                <Link as={ReachLink} to="/feed">
-                  <Text fontWeight={"bold"}>Feed</Text>
-                </Link>
+          <Flex alignContent={"center"}>
+            <Stack direction={"row"} spacing={7} justifyContent={"center"}>
+              {/* THE FEED LINK */}
+              <Link as={ReachLink} to="/feed">
+                <Text fontWeight={"bold"}>Feed</Text>
+              </Link>
 
-                {/* THE EXPLORE LINK */}
-                <Link as={ReachLink} to="/explore">
-                  <Text fontWeight={"bold"}>Explore</Text>
-                </Link>
-
+              {/* THE EXPLORE LINK */}
+              <Link as={ReachLink} to="/explore">
+                <Text fontWeight={"bold"}>Explore</Text>
+              </Link>
+              <GoogleOAuthProvider clientId={GOOGLE_ID}>
                 {userId ? (
                   <ProfileButton handleLogout={handleLogout} navigate={navigate} />
                 ) : (
-                  // <Button
-                  //   onClick={() => {
-                  //     googleLogout();
-                  //     handleLogout();
-                  //   }}
-                  // >
-                  //   <ProfileButton />
-                  //   </Button>
                   <GoogleLogin
                     type="icon"
                     shape="circle"
@@ -114,11 +105,11 @@ export default function Nav({ userId, handleLogin, handleLogout }) {
                     onError={(err) => console.log(err)}
                   />
                 )}
-              </Stack>
-            </Flex>
+              </GoogleOAuthProvider>
+            </Stack>
           </Flex>
-        </Box>
-      </GoogleOAuthProvider>
+        </Flex>
+      </Box>
     </>
   );
 }
