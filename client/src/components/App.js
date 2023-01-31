@@ -33,12 +33,14 @@ const theme = extendTheme({
  */
 const App = () => {
   const [userId, setUserId] = useState(undefined);
+  const [userName, setUserName] = useState("Anonymous");
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
       if (user._id) {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
+        setUserName(user.name);
       }
     });
   }, []);
@@ -63,11 +65,11 @@ const App = () => {
       <Fonts />
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Homepage />} />
+        <Route path="/" element={<Homepage/>} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/feed" element={<Feed userId={userId} />} />
-        <Route path="/explore" element={<Explore />} />
+        <Route path="/feed" element={<Feed userId={userId} name ={userName}/>} />
+        <Route path="/explore" element={<Explore userId={userId} name ={userName}/>} />
         <Route path="/profile" element={<Profile />} />
       </Routes>
     </ChakraProvider>

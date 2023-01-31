@@ -19,6 +19,7 @@ const PostHeader = (props) => {
                 </a>
             </div>
             <div className="Card-user">
+                {/* <Link to={`/profile/`} className="u-link u-bold u-inlineblock"> */}
                 <Link to={`/profile/${props.creator_id}`} className="u-link u-bold u-inlineblock">
                     {props.creator_name}
                 </Link>

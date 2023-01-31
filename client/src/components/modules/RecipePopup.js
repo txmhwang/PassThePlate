@@ -35,10 +35,24 @@ const RecipePopup = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [size, setSize] = React.useState('full')
     const [comments, setComments] = useState([]);
+    const [user, setUser] = useState(null);
+  
+  // useEffect(() => {
+  //   get("api/whoami").then((user) => {
+  //     if (JSON.stringify(user) !== "{}") {
+  //       setUser(user);
+  //     }
+  //   });
+  // });
   
     useEffect(() => {
       get("/api/comment", { parent: props.recipe_id }).then((commentObjs) => {
         setComments(commentObjs);
+      });
+      get("api/whoami").then((user) => {
+        if (JSON.stringify(user) !== "{}") {
+          setUser(user);
+        }
       });
     }, []);
 
@@ -49,9 +63,10 @@ const RecipePopup = (props) => {
     } else {
       commentsList = comments.map((CommentObj) => {
         <SingleComment 
+        key={`SingleComment_${CommentObj._id}`}
         creator_id={CommentObj.creator_id} 
         creator_name={CommentObj.creator_name} 
-        parent={CommentObj.parent} 
+        parent={CommentObj.recipe_id} 
         content={CommentObj.content} 
         rating={CommentObj.rating} 
         hours={CommentObj.hours}/>

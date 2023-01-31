@@ -1,5 +1,5 @@
 import React from "react";
-import { NewRecipe, NewPostInput } from "./NewRecipeInput";
+import { NewRecipe } from "./NewRecipeInput";
 import {
     Modal,
     ModalOverlay,
@@ -12,8 +12,15 @@ import {
     useDisclosure,
   } from '@chakra-ui/react'
 
+  /**
+ * New Recipe is a New Post component for comments
+ *
+ * Proptypes
+ * @param {string} creator_id is the userID passed onto newRecipe
+ * @param {string} creator_name is the user name passed onto newRecipe
+ */
 
-const Popup = () => {
+const Popup = (props) => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     return (
     <>
@@ -25,7 +32,7 @@ const Popup = () => {
             <ModalHeader className="u-text u-toppad">Add a New Recipe</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                <NewRecipe />
+                <NewRecipe creator_id = {props.creator_id} creator_name={props.creator_name} addNewRecipe = {props.addNewRecipe}/>
             </ModalBody>
 
             </ModalContent>

@@ -71,7 +71,6 @@ router.post("/recipes", (req, res) => {
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
     public: req.body.puclic,
-    // picture: req.body.pictures,
   });
   newRecipe.save().then((recipe) => res.send(recipe));
 });

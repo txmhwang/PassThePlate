@@ -34,6 +34,7 @@ const SingleRecipe = (props) => {
                 instructions = {props.instructions}
                 creator_id = {props.creator_id}
                 creator_name={props.creator_name}
+                recipe_id = {props.recipe_id}
                 />
             </div>
             

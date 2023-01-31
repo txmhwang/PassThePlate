@@ -1,4 +1,5 @@
 .Feed-popup{
+    margin-top: 32px;
     display: flex;
     justify-content: center;
 }
@@ -9,4 +10,9 @@
     column-gap: 32px;
     flex-wrap: wrap;
     column-count: 2;
+}
+
+.ExploreHeader{
+    display: flex;
+    justify-content: center;
 }

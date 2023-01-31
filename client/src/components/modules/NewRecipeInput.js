@@ -1,6 +1,5 @@
-import React, { useState } from "react";
-import { post } from "../../utilities.js";
-import { Checkbox, CheckboxGroup, Textarea } from "@chakra-ui/react";
+import React, { useState, useEffect } from "react";
+import { get, post } from "../../utilities.js";
 
 import "./NewRecipeInput.css";
 /**
@@ -14,7 +13,7 @@ import "./NewRecipeInput.css";
 
  * @param {({recipe_id, recipeName, Ingredients, Instructions}) => void} onSubmit: (function) triggered when this post is submitted, takes {recipe_id, recipeName, ingredients, instructions} as parameters
  */
-const initialValues = {
+let initialValues = {
   recipeName: "",
   Ingredients: "",
   Instructions: "",
@@ -51,32 +50,33 @@ const NewRecipeInput = (props) => {
         className="NewPostInput u-text"
       />{" "}
       <br />
-      <Textarea
+      <textarea
         type="text"
         placeholder={"Ingredients list"}
         value={values.Ingredients}
         onChange={handleChange}
         name="Ingredients"
-        className="NewPostInput u-text"
+        className="NewPostInput input-text u-text"
       />{" "}
       <br />
-      <Textarea
+      <textarea
         type="text"
         placeholder={"instructions list"}
         value={values.Instructions}
         onChange={handleChange}
         name="Instructions"
-        className="NewPostInput u-text"
-      />{" "}
+        className="NewPostInput input-text u-text"
+      />
       <br />
-      <Checkbox
-        defaultChecked
-        value={values.public}
-        // onChange={(e) => setValues.public(false)}
-        onChange={handleChange}
-      >
-        Make recipe public
-      </Checkbox>
+      <div className="NewPostInput-Checkbox">
+       <input 
+      type="checkbox"
+      value={values.public}
+      name = "public"
+      className="NewPostInput-checkbox"
+      /> 
+      <label className="NewPostInput-checkboxText">Make Recipe Public</label>
+      </div>
       <button
         type="submit"
         className="NewPostInput-button u-pointer u-text"
@@ -95,13 +95,25 @@ const NewRecipeInput = (props) => {
  * New Recipe is a New Post component for comments
  *
  * Proptypes
- * @param {string} defaultText is the placeholder text
+ * @param {string} creator_id
+ * @param {string} creator_name
+ * @param addNewRecipe
  */
 const NewRecipe = (props) => {
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    get("api/users", props.creator_id).then((user) => {
+      if (JSON.stringify(user) !== "{}") {
+        setUser(user);
+      }
+    });
+  });
+
   const addRecipe = (values) => {
     const body = {
-      creator_id: props._id,
-      creator_name: props.name,
+      creator_id: props.creator_id,
+      creator_name: props.creator_name,
       name: values.recipeName,
       ingredients: values.Ingredients,
       instructions: values.Instructions,
@@ -110,7 +122,6 @@ const NewRecipe = (props) => {
     post("/api/recipes", body).then((recipe) => {
       // display this recipe on the screen
       props.addNewRecipe(recipe);
-      props.your_recipes.concat(recipe);
     });
   };
   return (
@@ -194,16 +205,16 @@ const NewCommentInput = (props) => {
    * Proptypes
 
 
-   * @param {string} defaultText is the placeholder text
-   * @param {string} storyId to add comment to
+   * @param {string} addNewComment is the fn to add comment to page
+   * @param {string} parent to add comment to
    */
 //  * @param {string} parent
 
 const NewComment = (props) => {
   const addComment = (values) => {
     const body = {
-      creator_id: props.creator_id,
-      creator_name: props.creator_name,
+      // creator_id: props.creator_id,
+      // creator_name: props.creator_name,
       parent: props.recipe_id,
       content: values.content,
       rating: values.rating,
@@ -214,7 +225,7 @@ const NewComment = (props) => {
       props.addNewComment(comment);
     });
   };
-  return <NewCommentInput defaultText="New Comment" onSubmit={addComment} />;
+  return <NewCommentInput onSubmit={addComment} />;
 };
 
 export { NewComment, NewRecipe };
