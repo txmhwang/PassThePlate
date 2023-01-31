@@ -1,9 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
-
+import { useState, useEffect } from "react";
+import pfp from "../../public/profile.png";
+import food from "../../public/food.jpg";
+import RecipePopup from "./RecipePopup";
+import PostHeader from "./PostHeader";
 
 /**
  * Proptypes
+ * @param {string} recipe_id
  * @param {string} creator_id
  * @param {string} creator_name
  * @param {string} name
@@ -12,21 +17,26 @@ import { Link } from "react-router-dom";
  */
 
 const SingleRecipe = (props) => {
+
     return (
-        <div className="RecipeContainer">
-            <div className="CreatorContainer">
-                {/* <Link to={`/profile/${props.creator_id}`} className="u-link u-bold">
-                    {props.creator_name}
-                </Link> */}
-                <h2 className="recipe-name">
-                    {props.name}
-                </h2>
-                {/* <img src={props.picture}/> */}
-                <h3 className="recipelabels"> Ingredients </h3>
-                <p className="recipe-content"> {props.ingredients} </p>
-                <h3 className="recipelabels"> Instructions </h3>
-                <p className="recipe-content"> {props.instructions} </p>
+        <div>
+            <PostHeader 
+            creator_id={props.creator_id}
+            creator_name ={props.creator_name}
+            />
+            <h2>
+                {props.name}
+            </h2>
+            <div>
+                <RecipePopup 
+                name = {props.name}
+                ingredients = {props.ingredients}
+                instructions = {props.instructions}
+                creator_id = {props.creator_id}
+                creator_name={props.creator_name}
+                />
             </div>
+            
         </div>
 
     );

@@ -4,12 +4,7 @@ import { NewComment } from "./NewRecipeInput";
 
 
 /**
- * @typedef ContentObject
- * @property {string} _id of story/comment
- * @property {string} creator_name
- * @property {string} creator_id
- * @property {string} content of the story/comment
- */
+ * 
 
 /**
  * Component that holds all the comments for a story
@@ -20,38 +15,25 @@ import { NewComment } from "./NewRecipeInput";
  */
  const CommentsBlock = (props) => {
   return(
-    <div>
-      {props.comments.map((comment) => (
-        <SingleComment 
-        parent={props.parent} 
-        // creator_id={props.creator_id} 
-        // creator_name={props.creator_name} 
-        rating={props.rating} 
-        hours ={props.hours} 
-        content={props.content}/>
+    <div className="Card-commentsBlock">
+      <div className="Recipe-CommentsSection">
+        {props.comments.map((comment) => (
+        <SingleComment
+        parent={comment.parent} 
+        creator_id={comment.creator_id} 
+        creator_name={comment.creator_name} 
+        rating={comment.rating} 
+        hours ={comment.hours} 
+        content={comment.content}/>
       ))};
-      <NewComment parent={props.parent}/>
+      {props.userId && (
+        <NewComment parent={props.recipe.recipe_id} addNewComment={props.addNewComment} />
+      )};
+      {/* <NewComment parent={props.parent} addNewComment={addNewComment} /> */}
+      </div>
     </div>
   );
-    // return (
-    //   <div className="Card-commentSection">
-    //     <div className="story-comments">
-    //       {props.comments.map((comment) => (
-    //         <SingleComment
-    //           key={`SingleComment_${comment._id}`}
-    //           _id={comment._id}
-    //           creator_name={comment.creator_name}
-    //           creator_id={comment.creator_id}
-    //           content={comment.content}
-    //         />
-    //       ))}
-    //       {props.userId && (
-    //         <NewComment storyId={props.story._id} addNewComment={props.addNewComment} />
-    //       )}
-    //     </div>
-    //   </div>
-    // );
-  };
+};
   
   export default CommentsBlock;
   

@@ -10,20 +10,23 @@ import "../utilities.css";
 import Homepage from "./pages/Home.js";
 import LoginPage from "./pages/Login.js";
 import Feed from "./pages/Feed.js";
+import Explore from "./pages/Explore.js";
+import Profile from "./pages/Profile.js";
 
 import { socket } from "../client-socket.js";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { get, post } from "../utilities";
 
-import {Fonts} from './Fonts'
+import { Fonts } from "./Fonts";
+import NavBar from "./modules/NavBar";
 
 const theme = extendTheme({
   fonts: {
-    heading: 'Open Sans',
-    body: 'Raleway',
+    heading: "Open Sans",
+    body: "Raleway",
   },
-})
+});
 
 /**
  * Define the "App" component
@@ -58,19 +61,16 @@ const App = () => {
   return (
     <ChakraProvider theme={theme}>
       <Fonts />
+      <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route
-          path="/"
-          element={
-            <Homepage/>
-          }
-        />
+        <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/login" element={<LoginPage />}/>
-        <Route path="/feed" element={<Feed />} />
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="/feed" element={<Feed userId={userId} />} />
+        <Route path="/explore" element={<Explore />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </ChakraProvider>
-
   );
 };
 

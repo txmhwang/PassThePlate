@@ -22,6 +22,7 @@ const LoginPage = () => {
     const [signupPass, setSignupPass] = useState("");
     const [signupError, setSignupError] = useState(false);
     const [signupErrorMessage, setSignupErrorMessage] = useState("");
+    const [signupPfp, setSignupPfp] = useState("../../public/profile.png");
 
 
     const showPassword = () => {setShow(!show)}
@@ -57,7 +58,7 @@ const LoginPage = () => {
     }
 
     const signup = () => {
-        let parameters = [firstName, lastName, signupEmail, signupPass];
+        let parameters = [firstName, lastName, signupEmail, signupPass, signupPfp];
         let empty = false;
 
         function isEmpty(item){
@@ -71,7 +72,7 @@ const LoginPage = () => {
         }
         else {
             // name, googleid, email, password
-            let data = {name: firstName + " " + lastName, googleid: 1, email: signupEmail, password: signupPass};
+            let data = {name: firstName + " " + lastName, googleid: 1, email: signupEmail, password: signupPass, pfp: signupPfp,};
             post("/api/createUser", data).then((user) => console.log(user));
         }
 
@@ -79,7 +80,6 @@ const LoginPage = () => {
 
     return (
         <>
-            <Nav />
             <Flex h="container.sm" alignItems={"center"} justifyContent="center" direction={"row"}>
                 <Flex p={"36"} direction={"column"}>
                     <Stack spacing={4}>
