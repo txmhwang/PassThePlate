@@ -34,7 +34,7 @@ const Feed = (props) => {
   const addNewRecipe = (RecipeObj) => {
     setRecipes(recipes.concat([RecipeObj]));
   };
-
+  console.log(friends);
   let recipesList = null;
   if (recipes === null) {
     return (
@@ -46,7 +46,7 @@ const Feed = (props) => {
   } else {
     recipesList = recipes.map((RecipeObj) => {
       //only get following feed
-      if (user.friends.includes(RecipeObj.creator_id) || RecipeObj.creator_id === props.userId) {
+      if (friends.includes(RecipeObj.creator_id) || RecipeObj.creator_id === props.userId) {
         return (
           <Card
             key={`Card_${RecipeObj._id}`}
