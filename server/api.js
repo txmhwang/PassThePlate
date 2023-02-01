@@ -111,13 +111,8 @@ router.get("/specificRecipes", (req, res) => {
 
 router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({
-<<<<<<< Updated upstream
     creator_id: req.user._id,
     creator_name: req.user.name,
-=======
-    creator_id: req.body.creator_id,
-    creator_name: req.body.creator_name,
->>>>>>> Stashed changes
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
