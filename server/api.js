@@ -79,6 +79,9 @@ router.post("/aboutme", (req, res) => {
 router.get("/recipes", (req, res) => {
   Recipe.find({}).then((recipe) => res.send(recipe));
 });
+router.get("/specificRecipes", (req, res) => {
+  Recipe.find({ _id: req.query._id }).then((recipes) => res.send(recipes));
+});
 
 router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({

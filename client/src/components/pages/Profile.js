@@ -19,6 +19,11 @@ import {
   FormLabel,
   Input,
   Textarea,
+  Card,
+  CardHeader,
+  CardBody,
+  CardFooter,
+  SimpleGrid,
 } from "@chakra-ui/react";
 import { get, post } from "../../utilities";
 import { TiPencil } from "react-icons/ti";
@@ -44,7 +49,6 @@ const AddButton = ({ userId }) => {
 
   return (
     <>
-      {console.log(content)}
       <Text>{isEmpty ? "There is nothing about me :(" : content}</Text>
       <Flex>
         <Button bg={"green.100"} onClick={onOpen}>
@@ -101,9 +105,15 @@ const AddButton = ({ userId }) => {
 
 const Profile = () => {
   const [userId, setUserId] = useState("");
+  const [name, setName] = useState("");
+  const [recipes, setRecipes] = useState([]);
   useEffect(() => {
     get("/api/whoami").then((user) => {
       setUserId(user._id);
+      setName(user.name);
+      get("/api/specificRecipes", { _id: user._id }).then((recipes) => {
+        setRecipes(Object.entries(recipes));
+      });
     });
   });
 
@@ -162,12 +172,38 @@ const Profile = () => {
           position="fixed"
           left={profileLeftWidth}
           top={"10%"}
-          bg="red"
-        ></Flex>
+          justifyContent={"center"}
+        >
+          <Center>
+            <Heading>
+              <Text fontSize={"9xl"}>{name}</Text>
+            </Heading>
+          </Center>
+        </Flex>
 
         {/* A subset of recipes that the user has */}
-
-        {/* A list of recipes that the uers liked */}
+        <Flex
+          height={"30%"}
+          width={profileRightWidth}
+          top={"40%"}
+          position={"fixed"}
+          justifyContent={"center"}
+          left={profileLeftWidth}
+        >
+          {recipes.length === 0 ? (
+            <Card>
+              <CardHeader>
+                <Heading size="md"> No Recipes</Heading>
+              </CardHeader>
+              <CardBody>
+                <Text>You have no recipes currently. Go to feed to add recipes.</Text>
+              </CardBody>
+            </Card>
+          ) : (
+            // copy the same format from above and just use the mapping functionality to map all the cards with their desirable ingredients.
+            <></>
+          )}
+        </Flex>
       </Flex>
     </Flex>
   );
