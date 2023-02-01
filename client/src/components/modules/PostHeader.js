@@ -10,22 +10,19 @@ import pfp from "../../public/profile.png";
  */
 
 const PostHeader = (props) => {
-
-    return (
-        <div className="Card-CreatorContainer">
-            <div className="Card-pfp">
-                <a href="/login" >
-                    <img src={pfp}/>
-                </a>
-            </div>
-            <div className="Card-user">
-                {/* <Link to={`/profile/`} className="u-link u-bold u-inlineblock"> */}
-                <Link to={`/profile/${props.creator_id}`} className="u-link u-bold u-inlineblock">
-                    {props.creator_name}
-                </Link>
-            </div>
-        </div>
-
-    );
+  return (
+    <div className="Card-CreatorContainer">
+      <div className="Card-pfp">
+        <a href="/login">
+          <img src={pfp} />
+        </a>
+      </div>
+      <div className="Card-user">
+        <Link to={`/profile/${props.creator_id}`} className="u-link u-bold u-inlineblock">
+          {props.creator_name}
+        </Link>
+      </div>
+    </div>
+  );
 };
 export default PostHeader;

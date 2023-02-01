@@ -23,9 +23,11 @@ import { get, post } from "../../utilities.js";
 
 const ProfileButton = ({ handleLogout, navigate }) => {
   const [username, setUsername] = useState("");
+  const [userId, setUserId] = useState("");
 
   get("api/whoami").then((user) => {
     setUsername(user["name"]);
+    setUserId(user._id);
   });
   return (
     <Menu>
@@ -56,7 +58,7 @@ const ProfileButton = ({ handleLogout, navigate }) => {
         <MenuItem
           onClick={() => {
             // it will move to the profile page
-            navigate("/profile");
+            navigate(`/profile/${userId}`);
           }}
         >
           Profile
@@ -73,10 +75,7 @@ export default function Nav({ userId, handleLogin, handleLogout }) {
   return (
     <>
       <Box bg={useColorModeValue("whiteAlpha.100", "whiteAlpha.900")} px={4}>
-        {" "}
-        {/* */}
         <Flex h={16} alignItems={"center"} justifyContent={"space-between"}>
-          {/* <Box>Logo</Box> */}
           <Box boxSize={"50px"}>
             <a href="/">
               <Image src={Logo} />
@@ -86,12 +85,12 @@ export default function Nav({ userId, handleLogin, handleLogout }) {
           <Flex alignContent={"center"}>
             <Stack direction={"row"} spacing={7} justifyContent={"center"}>
               {/* THE FEED LINK */}
-              <Link as={ReachLink} to="/feed">
+              <Link as={ReachLink} to={`/feed`}>
                 <Text fontWeight={"bold"}>Feed</Text>
               </Link>
 
               {/* THE EXPLORE LINK */}
-              <Link as={ReachLink} to="/explore">
+              <Link as={ReachLink} to={`/explore`}>
                 <Text fontWeight={"bold"}>Explore</Text>
               </Link>
               <GoogleOAuthProvider clientId={GOOGLE_ID}>

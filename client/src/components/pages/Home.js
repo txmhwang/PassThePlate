@@ -88,7 +88,7 @@ const Homepage = () => {
                     if (signedIn) {
                       setAnimate(true);
                       setTimeout(() => {
-                        navigate("/feed");
+                        navigate(`/feed/${user._id}`);
                       }, time);
                     }
                   }}

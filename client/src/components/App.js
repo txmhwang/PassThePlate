@@ -57,7 +57,7 @@ const App = () => {
 
   const handleLogout = () => {
     setUserId(undefined);
-    setUserName(undefined)
+    setUserName(undefined);
     post("/api/logout");
   };
 
@@ -66,12 +66,12 @@ const App = () => {
       <Fonts />
       <NavBar handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
       <Routes>
-        <Route path="/" element={<Homepage/>} />
+        <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/feed" element={<Feed userId={userId} name ={userName}/>} />
-        <Route path="/explore" element={<Explore userId={userId} name ={userName}/>} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="/feed" element={<Feed userId={userId} name={userName} />} />
+        <Route path="/explore" element={<Explore userId={userId} name={userName} />} />
+        <Route path={`/profile/${userId}`} element={<Profile />} />
       </Routes>
     </ChakraProvider>
   );

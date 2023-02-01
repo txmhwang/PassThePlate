@@ -30,7 +30,6 @@ router.get("/whoami", (req, res) => {
     // not logged in
     return res.send({});
   }
-
   res.send(req.user);
 });
 
@@ -45,6 +44,12 @@ router.get("/users", (req, res) => {
   User.find({}).then((users) => res.send(users));
 });
 
+router.get("/getUser", (req, res) => {
+  User.find({ _id: req.query._id }).then((user) => {
+    res.send(user);
+  });
+});
+
 router.post("/createUser", (req, res) => {
   const newUser = new User({
     name: req.body.name,
@@ -54,9 +59,21 @@ router.post("/createUser", (req, res) => {
     saved_recipes: [],
     email: req.body.email,
     password: req.body.password,
-    // pfp: req.body.pfp,
   });
   newUser.save().then((user) => res.send(user));
+});
+router.post("/aboutme", (req, res) => {
+  User.findOne({ _id: req.body._id }, (err, myModel) => {
+    if (err) return console.log(err);
+
+    myModel.contents = req.body.contents;
+
+    myModel.save((error, updatedModel) => {
+      if (error) return console.log(error);
+
+      res.send(updatedModel);
+    });
+  });
 });
 
 router.get("/recipes", (req, res) => {
@@ -65,8 +82,8 @@ router.get("/recipes", (req, res) => {
 
 router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({
-    creator_id: req.user._id,
-    creator_name: req.user.name,
+    creator_id: req.body._id,
+    creator_name: req.body.name,
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
