@@ -54,8 +54,12 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+<<<<<<< Updated upstream
       setUserName(user.name);
       setUserFriends(user.friends);
+=======
+      // setUserName(user.name);
+>>>>>>> Stashed changes
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -75,10 +79,17 @@ const App = () => {
         <Route path="/" element={<Homepage />} />
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<LoginPage />} />
+<<<<<<< Updated upstream
         <Route path="/feed" element={<Feed userId={userId} name={userName} />} />
         <Route path="/explore" element={<Explore userId={userId} name={userName} />} />
         <Route path="/friends" element={<Friends userId={userId} friends={userFriends} />} />
         <Route path={`/profile/${userId}`} element={<Profile />} />
+=======
+        <Route path="/feed" element={<Feed userId={userId} userName = {userName}/>} />
+        <Route path="/explore" element={<Explore userId={userId}/>} />
+        <Route path="/profile" element={<Profile />} />
+
+>>>>>>> Stashed changes
       </Routes>
     </ChakraProvider>
   );

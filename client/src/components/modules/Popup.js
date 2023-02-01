@@ -13,8 +13,6 @@ import {
   } from '@chakra-ui/react'
 
   /**
- * New Recipe is a New Post component for comments
- *
  * Proptypes
  * @param {string} creator_id is the userID passed onto newRecipe
  * @param {string} creator_name is the user name passed onto newRecipe

@@ -11,12 +11,13 @@ import { NewComment } from "./NewRecipeInput";
  *
  * Proptypes
  * @param {ContentObject[]} comments
- * @param {string} recipe_id
- * @param {string} creator_id
- * @param {string} creator_name
- * @param {ContentObject} addNewComment
+//  * @param {string} recipe_id
+//  * @param {string} creator_id
+//  * @param {string} creator_name
+//  * @param {ContentObject} addNewComment
  */
  const CommentsBlock = (props) => {
+  
   return(
     <div className="Card-commentsBlock">
       <div className="Recipe-CommentsSection">
@@ -32,12 +33,12 @@ import { NewComment } from "./NewRecipeInput";
       {/* {props.userId && (
         <NewComment parent={props.recipe.recipe_id} addNewComment={props.addNewComment} />
       )}; */}
-      <NewComment 
+      {/* <NewComment 
       recipe_id={props.recipe_id} 
       addNewComment={props.addNewComment} 
       creator_id = {props.creator_id}
       creator_name = {props.creator_name}
-      /> 
+      />  */}
       </div>
     </div>
   );

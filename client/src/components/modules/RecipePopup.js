@@ -60,7 +60,7 @@ const RecipePopup = (props) => {
   //   setComments(comments.concat([commentObj]));
   // };
   const addNewComment = (commentObj) => {
-    setComments([commentObj].concat([comments]));
+    setComments([commentObj].concat(comments));
   };
 
   let commentsList = null;
@@ -109,22 +109,18 @@ const RecipePopup = (props) => {
               <hr/>
               <div>
                   <h3 className="Card-RecipeLabels">Comments</h3>
-                  <div className="Card-commentsblock">
-                      {/* {commentsList} */}
-                      {/* <NewComment 
+                  <div className="Card-NewComment">
+                      <NewComment 
                       recipe_id={props.recipe_id} 
                       addNewComment={addNewComment} 
-                      creator_id = {props.creator_id}
-                      creator_name = {props.creator_name}
-                      />  */}
-                      <CommentsBlock 
-                      recipe_id={props.recipe_id} 
-                      addNewComment={addNewComment} 
-                      creator_id = {props.creator_id}
-                      creator_name = {props.creator_name}
+                      /> 
+                  </div>
+                  <div className="Card-commentsblock">                     
+                      <CommentsBlock
                       comments = {comments}
                       />
                   </div>
+                  
                   
               </div>
               

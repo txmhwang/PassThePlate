@@ -41,6 +41,11 @@ router.post("/initsocket", (req, res) => {
 });
 
 router.get("/users", (req, res) => {
+  // if (req.query.creator_id){
+  //   User.find({"creator_id": req.query.creator_id}).then((users) => res.send(users));
+  // } else {
+  //   User.find({}).then((users) => res.send(users));
+  // }
   User.find({}).then((users) => res.send(users));
 });
 
@@ -106,8 +111,13 @@ router.get("/specificRecipes", (req, res) => {
 
 router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({
+<<<<<<< Updated upstream
     creator_id: req.user._id,
     creator_name: req.user.name,
+=======
+    creator_id: req.body.creator_id,
+    creator_name: req.body.creator_name,
+>>>>>>> Stashed changes
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,
@@ -123,15 +133,15 @@ router.get("/publicrecipes", (req, res) => {
 });
 
 router.get("/comment", (req, res) => {
-  Comment.find({ parent: req.query.parent }).then((comments) => {
+  Comment.find({parent: req.query.parent}).then((comments) => {
     res.send(comments);
   });
 });
 
 router.post("/comment", (req, res) => {
   const newComment = new Comment({
-    creator_name: req.user.name,
-    creator_id: req.user._id,
+    creator_name: req.body.creator_name,
+    creator_id: req.body.creator_id,
     content: req.body.content,
     parent: req.body.parent,
     rating: req.body.rating,

@@ -16,8 +16,13 @@ const Feed = (props) => {
   const [friends, setFriends] = useState([])
 
   useEffect(() => {
+<<<<<<< Updated upstream
     get("api/recipes").then((RecipeObjs)=>{
       setRecipes(RecipeObjs);
+=======
+    get("api/recipes", {creator_id: props.userId}).then((recipe) => {
+      setFriendsRecipes(recipe);
+>>>>>>> Stashed changes
     });
     get("api/whoami").then((User) => {
       if (JSON.stringify(User) !== "{}") {
@@ -29,6 +34,18 @@ const Feed = (props) => {
     });
   }, []);
 
+<<<<<<< Updated upstream
+=======
+  
+  for (var i=0; i< friends.length; i++) {
+    const [currfriendrecipes, setCurrfriendrecipes] = useState([]);
+    get("api/recipes", {creator_id: friends[i]}).then((friendsrecipes) => {
+      setCurrfriendrecipes(friendsrecipes);
+    });
+    setFriendsRecipes(friendsRecipes.concat(currfriendrecipes));
+  };
+
+>>>>>>> Stashed changes
   // this gets called when the user pushes "Submit", so their
   // post gets added to the screen right away
   const addNewRecipe = (RecipeObj) => {
@@ -44,6 +61,7 @@ const Feed = (props) => {
   else if (recipes.length === 0) {
     recipesList = <div> No Friends' Recipes! </div>;
   } else {
+<<<<<<< Updated upstream
     recipesList = recipes.map((RecipeObj) => {
       //only get following feed
       if (user.friends.includes(RecipeObj.creator_id) || RecipeObj.creator_id === props.userId) {
@@ -62,6 +80,21 @@ const Feed = (props) => {
           />
         );
       }
+=======
+    recipesList = friendsRecipes.map((RecipeObj) => {
+      return (
+        <Card
+          key={`Card_${RecipeObj._id}`}
+          recipe_id={RecipeObj.recipe_id}
+          creator_id={RecipeObj.creator_id}
+          creator_name={RecipeObj.creator_name}
+          name={RecipeObj.name}
+          ingredients={RecipeObj.ingredients}
+          instructions={RecipeObj.instructions}
+          public={RecipeObj.public}
+        />
+      );
+>>>>>>> Stashed changes
     });
   }
 
@@ -70,10 +103,14 @@ const Feed = (props) => {
       <div>
         <h1 className="ExploreHeader"> YOUR FOLLOWING </h1>
         <div className="Feed-popup">
+<<<<<<< Updated upstream
           {
             props.userId && <Popup 
             addNewRecipe={addNewRecipe}/>
           }
+=======
+          <Popup creator_id={props.userId} creator_name={props.userName} addNewRecipe={addNewRecipe}/>
+>>>>>>> Stashed changes
         </div>
         <div>
           <div className="Feed-posts">{recipesList}</div>

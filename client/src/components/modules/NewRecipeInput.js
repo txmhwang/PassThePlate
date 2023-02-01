@@ -6,18 +6,14 @@ import "./NewRecipeInput.css";
  * New Recipe is a parent component for all input components
  *
  * Proptypes
- * @param {string} recipe_id for comments
- * @param {string} recipeName_default
- * @param {{name: String, quantity: Number, unit: String}} ingredients_default
- * @param {[string]} instructions_default
-
- * @param {({recipe_id, recipeName, Ingredients, Instructions}) => void} onSubmit: (function) triggered when this post is submitted, takes {recipe_id, recipeName, ingredients, instructions} as parameters
+ * @param {} onSubmit: (function) triggered when this post is submitted, takes {recipe_id, recipeName, ingredients, instructions} as parameters
  */
+
 let initialValues = {
   recipeName: "",
   Ingredients: "",
   Instructions: "",
-  public: true,
+  Public: true,
 };
 
 const NewRecipeInput = (props) => {
@@ -71,8 +67,8 @@ const NewRecipeInput = (props) => {
       <div className="NewPostInput-Checkbox">
        <input 
       type="checkbox"
-      value={values.public}
-      name = "public"
+      value={values.Public}
+      name = "Public"
       className="NewPostInput-checkbox"
       /> 
       <label className="NewPostInput-checkboxText">Make Recipe Public</label>
@@ -100,6 +96,7 @@ const NewRecipeInput = (props) => {
 const NewRecipe = (props) => {
   // const [user, setUser] = useState(null);
   
+<<<<<<< Updated upstream
   // useEffect(() => {
   //   get("api/getUsers", { _id: props.creator_id}).then((User) => {
   //     if (JSON.stringify(User) !== "{}") {
@@ -110,10 +107,26 @@ const NewRecipe = (props) => {
 
   const addRecipe = (values) => {
     const body = {
+=======
+  useEffect(() => {
+    get("api/users", {_id: props.creator_id}).then((User) => {
+      if (JSON.stringify(User) !== "{}") {
+        setUser(User);
+      }
+    });
+  });
+
+  const addRecipe = (values) => {
+    const body = {
+      // creator_id: props.creator_id,
+      // creator_name: props.creator_name,
+      creator_id: user._id,
+      creator_name: user.name,
+>>>>>>> Stashed changes
       name: values.recipeName,
       ingredients: values.Ingredients,
       instructions: values.Instructions,
-      public: values.public,
+      public: values.Public,
     };
     post("/api/recipes", body).then((recipe) => {
       // display this recipe on the screen
@@ -208,14 +221,34 @@ const NewCommentInput = (props) => {
 
    * @param {string} addNewComment is the fn to add comment to page
    * @param {string} recipe_id to add comment to
+<<<<<<< Updated upstream
+=======
+  //  * @param {string} creator_id
+  //  * @param {string} creator_name
+>>>>>>> Stashed changes
    */
 //  * @param {string} parent
 
 const NewComment = (props) => {
+  const [user, setUser] = useState(null);
+  
+  useEffect(() => {
+    get("api/users", {_id: props.creator_id}).then((User) => {
+      if (JSON.stringify(User) !== "{}") {
+        setUser(User);
+      }
+    });
+  });
+
   const addComment = (values) => {
     const body = {
+<<<<<<< Updated upstream
       // creator_id: props.creator_id,
       // creator_name: props.creator_name,
+=======
+      creator_id: user._id,
+      creator_name: user.name,
+>>>>>>> Stashed changes
       parent: props.recipe_id,
       content: values.content,
       rating: values.rating,
