@@ -16,3 +16,27 @@
     display: flex;
     justify-content: center;
 }
+
+
+.FriendsContainer {
+    width: calc(100vh - 300px);
+    padding: 32px;
+    display: flex;
+    flex-grow: 1;
+    /* justify-content: center; */
+    flex-wrap: wrap;
+    /* align-items: center; */
+    overflow-x: hidden;
+    float: right;
+}
+
+.label {
+    justify-content: center;
+}
+
+.CurrentFriends {
+    width: 300px;
+    float: left;
+    padding-left: 32px;
+    padding-top: 32px;
+}

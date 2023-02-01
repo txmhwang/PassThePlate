@@ -12,6 +12,7 @@ import LoginPage from "./pages/Login.js";
 import Feed from "./pages/Feed.js";
 import Explore from "./pages/Explore.js";
 import Profile from "./pages/Profile.js";
+import Friends from "./pages/Friends.js";
 
 import { socket } from "../client-socket.js";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
@@ -34,6 +35,7 @@ const theme = extendTheme({
 const App = () => {
   const [userId, setUserId] = useState(undefined);
   const [userName, setUserName] = useState(undefined);
+  const [userFriends, setUserFriends] = useState([]);
 
   useEffect(() => {
     get("/api/whoami").then((user) => {
@@ -41,6 +43,7 @@ const App = () => {
         // they are registed in the database, and currently logged in.
         setUserId(user._id);
         setUserName(user.name);
+        setUserFriends(user.friends);
       }
     });
   }, []);
@@ -51,6 +54,8 @@ const App = () => {
     console.log(`Logged in as ${decodedCredential.name}`);
     post("/api/login", { token: userToken }).then((user) => {
       setUserId(user._id);
+      setUserName(user.name);
+      setUserFriends(user.friends);
       post("/api/initsocket", { socketid: socket.id });
     });
   };
@@ -58,6 +63,7 @@ const App = () => {
   const handleLogout = () => {
     setUserId(undefined);
     setUserName(undefined);
+    setUserFriends([]);
     post("/api/logout");
   };
 
@@ -71,6 +77,7 @@ const App = () => {
         <Route path="/login" element={<LoginPage />} />
         <Route path="/feed" element={<Feed userId={userId} name={userName} />} />
         <Route path="/explore" element={<Explore userId={userId} name={userName} />} />
+        <Route path="/friends" element={<Friends userId={userId} friends={userFriends} />} />
         <Route path={`/profile/${userId}`} element={<Profile />} />
       </Routes>
     </ChakraProvider>

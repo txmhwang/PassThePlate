@@ -70,8 +70,8 @@ const RecipePopup = (props) => {
     commentsList = comments.map((CommentObj) => {
       <SingleComment 
       key={`SingleComment_${CommentObj._id}`}
-      creator_id={props.creator_id} 
-      creator_name={props.creator_name} 
+      creator_id={CommentObj.creator_id} 
+      creator_name={CommentObj.creator_name} 
       parent={CommentObj.recipe_id} 
       content={CommentObj.content} 
       rating={CommentObj.rating} 

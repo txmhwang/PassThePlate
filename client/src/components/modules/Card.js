@@ -21,6 +21,7 @@ const Card = (props) => {
       <div className="Card-container">
 
         <SingleRecipe
+          _id = {props._id}
           recipe_id = {props.recipe_id}
           creator_id = {props.creator_id}
           creator_name = {props.creator_name}
@@ -28,6 +29,7 @@ const Card = (props) => {
           ingredients = {props.ingredients}
           instructions = {props.instructions}
           public ={props.public}
+          userId = {props.userId}
         />
         <hr/>
       </div>

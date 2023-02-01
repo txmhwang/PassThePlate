@@ -84,6 +84,11 @@ export default function Nav({ userId, handleLogin, handleLogout }) {
 
           <Flex alignContent={"center"}>
             <Stack direction={"row"} spacing={7} justifyContent={"center"}>
+              {/* THE FRIENDS LINK */}
+              <Link as={ReachLink} to={`/friends`}>
+                <Text fontWeight={"bold"}>Find Friends</Text>
+              </Link>
+
               {/* THE FEED LINK */}
               <Link as={ReachLink} to={`/feed`}>
                 <Text fontWeight={"bold"}>Feed</Text>

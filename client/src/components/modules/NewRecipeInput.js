@@ -95,25 +95,21 @@ const NewRecipeInput = (props) => {
  * New Recipe is a New Post component for comments
  *
  * Proptypes
- * @param {string} creator_id
- * @param {string} creator_name
  * @param addNewRecipe
  */
 const NewRecipe = (props) => {
-  const [user, setUser] = useState(null);
+  // const [user, setUser] = useState(null);
   
-  useEffect(() => {
-    get("api/users", props.creator_id).then((user) => {
-      if (JSON.stringify(user) !== "{}") {
-        setUser(user);
-      }
-    });
-  });
+  // useEffect(() => {
+  //   get("api/getUsers", { _id: props.creator_id}).then((User) => {
+  //     if (JSON.stringify(User) !== "{}") {
+  //       setUser(User);
+  //     }
+  //   });
+  // });
 
   const addRecipe = (values) => {
     const body = {
-      creator_id: props.creator_id,
-      creator_name: props.creator_name,
       name: values.recipeName,
       ingredients: values.Ingredients,
       instructions: values.Instructions,
@@ -142,6 +138,7 @@ const initialComment = {
  *
  * Proptypes
  * @param {string} onSubmit
+ * @param {string} recipe_id
  */
 const NewCommentInput = (props) => {
   const [values, setValues] = useState(initialComment);
@@ -211,16 +208,14 @@ const NewCommentInput = (props) => {
 
    * @param {string} addNewComment is the fn to add comment to page
    * @param {string} recipe_id to add comment to
-   * @param {string} creator_id
-   * @param {string} creator_name
    */
 //  * @param {string} parent
 
 const NewComment = (props) => {
   const addComment = (values) => {
     const body = {
-      creator_id: props.creator_id,
-      creator_name: props.creator_name,
+      // creator_id: props.creator_id,
+      // creator_name: props.creator_name,
       parent: props.recipe_id,
       content: values.content,
       rating: values.rating,

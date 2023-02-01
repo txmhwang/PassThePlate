@@ -32,7 +32,9 @@ const Popup = (props) => {
             <ModalHeader className="u-text u-toppad">Add a New Recipe</ModalHeader>
             <ModalCloseButton />
             <ModalBody>
-                <NewRecipe creator_id = {props.creator_id} creator_name={props.creator_name} addNewRecipe = {props.addNewRecipe}/>
+                <NewRecipe 
+                // creator_id = {props.creator_id} creator_name={props.creator_name} 
+                addNewRecipe = {props.addNewRecipe}/>
             </ModalBody>
 
             </ModalContent>

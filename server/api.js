@@ -22,6 +22,7 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
+const user = require("./models/user");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
@@ -45,10 +46,31 @@ router.get("/users", (req, res) => {
 });
 
 router.get("/getUser", (req, res) => {
-  User.find({ _id: req.query._id }).then((user) => {
+  User.findById({ _id: req.query._id }).then((user) => {
     res.send(user);
   });
 });
+
+router.get("/strangers", (req, res) => {
+  const friendids = req.query.friendids;
+  User.find({_id: {$nin: friendids}}, (err, users) =>{
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send(users);
+  });
+});
+
+// router.get("/feed", (req, res)=>{
+//   const friendids = req.query.friendids;
+//   Recipe.find({_id: {$in: friendids}}, (err, docs)=>{
+//     if(err) {
+//       return res.status(500).send(err);
+//     }
+//     res.send(docs);
+//   });
+// });
+
 
 router.post("/createUser", (req, res) => {
   const newUser = new User({
@@ -62,6 +84,16 @@ router.post("/createUser", (req, res) => {
   });
   newUser.save().then((user) => res.send(user));
 });
+
+router.post("/updateUser", (req, res) => {
+  User.updateOne({_id: req.body._id}, {$set: {friends: req.body.friends}}, (err, result) => {
+    if (err) {
+      return res.status(500).send(err);
+    }
+    res.send(result);
+  });
+});
+
 router.post("/aboutme", (req, res) => {
   User.findOne({ _id: req.body._id }, (err, myModel) => {
     if (err) return console.log(err);
@@ -85,8 +117,8 @@ router.get("/specificRecipes", (req, res) => {
 
 router.post("/recipes", (req, res) => {
   const newRecipe = new Recipe({
-    creator_id: req.body._id,
-    creator_name: req.body.name,
+    creator_id: req.user._id,
+    creator_name: req.user.name,
     name: req.body.name,
     ingredients: req.body.ingredients,
     instructions: req.body.instructions,

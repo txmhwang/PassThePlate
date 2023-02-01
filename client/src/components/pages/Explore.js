@@ -20,9 +20,11 @@ const Explore = (props) => {
     publicRecipesList = publicRecipes.map((RecipeObj) => {
     return (
       <Card
+      key={`Card_${RecipeObj._id}`}
+      _id = {RecipeObj._id}
       recipe_id = {RecipeObj.recipe_id}
-      creator_id = {props.userId}
-      creator_name ={props.name}
+      creator_id = {RecipeObj.creator_id}
+      creator_name ={RecipeObj.creator_name}
       name = {RecipeObj.name}
       ingredients = {RecipeObj.ingredients}
       instructions = {RecipeObj.instructions}
@@ -31,11 +33,14 @@ const Explore = (props) => {
     );
     });
     }
+    if (!props.userId){
+      return <div> Please login to view</div>
+    }
     return (
         <div>
           <h1 className="ExploreHeader"> EXPLORE ALL RECIPES</h1>
           <div className="Feed-posts">
-            {publicRecipesList}
+            {props.userId && publicRecipesList}
           </div>
       </div>
     );

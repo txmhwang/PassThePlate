@@ -1,24 +1,27 @@
 import React, { useState, useEffect } from "react";
 import Card from "../modules/Card";
-import { NewRecipe } from "../modules/NewRecipeInput";
-import SingleRecipe from "../modules/SingleRecipe";
 import Popup from "../modules/Popup";
 
 import { get } from "../../utilities";
 import "../modules/Feed.css";
 
-// props = userId from App.js
+  /**
+ * Proptypes
+ * @param {string} userId is the userID passed onto newRecipe
+ * @param {string} userName is the user name passed onto newRecipe
+ */
 const Feed = (props) => {
-  // const [recipes, setRecipes] = useState([]);
+  const [recipes, setRecipes] = useState([]);
   const [user, setUser] = useState("");
   const [friends, setFriends] = useState([])
-  const [friendsRecipes, setFriendsRecipes] = useState([])
 
-  // // this will now only show the recipes that the user has
+  // this will now only show the recipes that the user has
   // useEffect(() => {
   //   get("api/whoami").then((user) => {
   //     if (JSON.stringify(user) !== "{}") {
-  //       setRecipes(user.your_recipes);
+  //       // setRecipes(user.your_recipes);
+  //       get("api/specificRecipes", {_id: user._id}).then((recipes)=>{
+  //         setRecipes(recipes);});
   //     } else {
   //       setRecipes(null)
   //     }
@@ -26,76 +29,89 @@ const Feed = (props) => {
   // });
 
   useEffect(() => {
-    // get("api/recipes").then((recipe) => {
-    //   setRecipes(recipe)
-    // })
-    get("api/recipes", {creator_id: user._id}).then((recipe) => {
-      setFriendsRecipes(recipe);
+    get("api/recipes").then((RecipeObjs)=>{
+      setRecipes(RecipeObjs);
     });
-    get("api/whoami").then((user) => {
-      if (JSON.stringify(user) !== "{}") {
-        setUser(user);
+    get("api/whoami").then((User) => {
+      if (JSON.stringify(User) !== "{}") {
+        setUser(User);
         setFriends(user.friends);
       } else {
-        setFriendsRecipes(null)
+        setRecipes(null)
       }
     });
-    
+    // get("api/recipes").then((RecipeObjs)=>{
+    //   setRecipes(RecipeObjs);
+    // });
   }, []);
-
   
-  for (var i=0; i< friends.length; i++) {
-    let currfriendrecipes = [];
-    get("api/recipes", {creator_id: friends[i]}).then((friendsrecipes) => {
-      currfriendrecipes = friendsrecipes;
-    });
-    setFriendsRecipes(friendsRecipes.concat(currfriendrecipes));
-  };
+  // user.friends.forEach(element => {
+  //   console.log(element);
+  //   const [theirRecipes, setTheirRecipes] = useState([]);
+  //   get("api/specificRecipes", {_id: element}).then((recipe)=> {setTheirRecipes(recipe);});
+  //   setRecipes(recipes.concat(theirRecipes))
+  // });
+  // // for (var i=0; i< user.friends.length; i++) {
+  //   const [currfriendrecipes, setCurrfriendrecipes] = useState([]);
+  //   get("api/recipes", {creator_id: friends[i]}).then((friendsrecipes) => {
+  //     setCurrfriendrecipes(friendsrecipes);
+  //   });
+  //   setFriendsRecipes(friendsRecipes.concat(currfriendrecipes));
+  // };
 
   // this gets called when the user pushes "Submit", so their
   // post gets added to the screen right away
   const addNewRecipe = (RecipeObj) => {
-    setFriendsRecipes([RecipeObj].concat(friendsRecipes));
+    setRecipes(recipes.concat([RecipeObj]));
     // user.your_recipes.concat(RecipeObj)
   };
 
   let recipesList = null;
-  if (friendsRecipes === null) {
+  if (recipes === null) {
     // recipesList = <div> Please login to view feed </div>;
     return (
-      <div> Please login to view feed </div>
+      <div> Please login to view</div>
     );
   }
-  else if (friendsRecipes.length === 0) {
+  else if (recipes.length === 0) {
     recipesList = <div> No Friends' Recipes! </div>;
   } else {
-    recipesList = friendsRecipes.map((RecipeObj) => {
-      return (
-        <Card
-          key={`Card_${RecipeObj._id}`}
-          recipe_id={RecipeObj.recipe_id}
-          creator_id={props.userId}
-          creator_name={props.name}
-          name={RecipeObj.name}
-          ingredients={RecipeObj.ingredients}
-          instructions={RecipeObj.instructions}
-          public={RecipeObj.public}
-        />
-      );
+    recipesList = recipes.map((RecipeObj) => {
+      if (user.friends.includes(RecipeObj.creator_id) || RecipeObj.creator_id === props.userId){
+        return (
+          <Card
+            key={`Card_${RecipeObj._id}`}
+            _id = {RecipeObj._id}
+            recipe_id={RecipeObj.recipe_id}
+            creator_id={RecipeObj.creator_id}
+            creator_name={RecipeObj.creator_name}
+            name={RecipeObj.name}
+            ingredients={RecipeObj.ingredients}
+            instructions={RecipeObj.instructions}
+            public={RecipeObj.public}
+            userId={props.userId}
+          />
+        );
+      }
     });
   }
 
+
   return (
-    <div>
-      <h1 className="ExploreHeader"> YOUR FOLLOWING </h1>
-      <div className="Feed-popup">
-        <Popup creator_id={props.creator_id} creator_name={props.creator_name} addNewRecipe={addNewRecipe}/>
-      </div>
       <div>
-        <div className="Feed-posts">{recipesList}</div>
+        <h1 className="ExploreHeader"> YOUR FOLLOWING </h1>
+        <div className="Feed-popup">
+          {
+            props.userId && <Popup 
+            // creator_id={props.userId} creator_name={props.userName}
+            addNewRecipe={addNewRecipe}/>
+          }
+        </div>
+        <div>
+          <div className="Feed-posts">{recipesList}</div>
+        </div>
       </div>
-    </div>
-  );
-};
+    );
+  };
 
 export default Feed;
