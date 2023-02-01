@@ -22,7 +22,6 @@ const router = express.Router();
 
 //initialize socket
 const socketManager = require("./server-socket");
-const user = require("./models/user");
 
 router.post("/login", auth.login);
 router.post("/logout", auth.logout);
