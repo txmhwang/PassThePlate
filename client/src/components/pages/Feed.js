@@ -46,7 +46,7 @@ const Feed = (props) => {
   } else {
     recipesList = recipes.map((RecipeObj) => {
       //only get following feed
-      if (user.friends.includes(RecipeObj.creator_id) || RecipeObj.creator_id === props.userId){
+      if (user.friends.includes(RecipeObj.creator_id) || RecipeObj.creator_id === props.userId) {
         return (
           <Card
             key={`Card_${RecipeObj._id}`}
