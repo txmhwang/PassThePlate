@@ -15,19 +15,6 @@ const Feed = (props) => {
   const [user, setUser] = useState("");
   const [friends, setFriends] = useState([])
 
-  // this will now only show the recipes that the user has
-  // useEffect(() => {
-  //   get("api/whoami").then((user) => {
-  //     if (JSON.stringify(user) !== "{}") {
-  //       // setRecipes(user.your_recipes);
-  //       get("api/specificRecipes", {_id: user._id}).then((recipes)=>{
-  //         setRecipes(recipes);});
-  //     } else {
-  //       setRecipes(null)
-  //     }
-  //   });
-  // });
-
   useEffect(() => {
     get("api/recipes").then((RecipeObjs)=>{
       setRecipes(RecipeObjs);
@@ -40,35 +27,16 @@ const Feed = (props) => {
         setRecipes(null)
       }
     });
-    // get("api/recipes").then((RecipeObjs)=>{
-    //   setRecipes(RecipeObjs);
-    // });
   }, []);
-  
-  // user.friends.forEach(element => {
-  //   console.log(element);
-  //   const [theirRecipes, setTheirRecipes] = useState([]);
-  //   get("api/specificRecipes", {_id: element}).then((recipe)=> {setTheirRecipes(recipe);});
-  //   setRecipes(recipes.concat(theirRecipes))
-  // });
-  // // for (var i=0; i< user.friends.length; i++) {
-  //   const [currfriendrecipes, setCurrfriendrecipes] = useState([]);
-  //   get("api/recipes", {creator_id: friends[i]}).then((friendsrecipes) => {
-  //     setCurrfriendrecipes(friendsrecipes);
-  //   });
-  //   setFriendsRecipes(friendsRecipes.concat(currfriendrecipes));
-  // };
 
   // this gets called when the user pushes "Submit", so their
   // post gets added to the screen right away
   const addNewRecipe = (RecipeObj) => {
     setRecipes(recipes.concat([RecipeObj]));
-    // user.your_recipes.concat(RecipeObj)
   };
 
   let recipesList = null;
   if (recipes === null) {
-    // recipesList = <div> Please login to view feed </div>;
     return (
       <div> Please login to view</div>
     );
@@ -77,6 +45,7 @@ const Feed = (props) => {
     recipesList = <div> No Friends' Recipes! </div>;
   } else {
     recipesList = recipes.map((RecipeObj) => {
+      //only get following feed
       if (user.friends.includes(RecipeObj.creator_id) || RecipeObj.creator_id === props.userId){
         return (
           <Card
@@ -103,7 +72,6 @@ const Feed = (props) => {
         <div className="Feed-popup">
           {
             props.userId && <Popup 
-            // creator_id={props.userId} creator_name={props.userName}
             addNewRecipe={addNewRecipe}/>
           }
         </div>
