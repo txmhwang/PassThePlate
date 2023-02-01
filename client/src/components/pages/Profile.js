@@ -111,11 +111,32 @@ const Profile = () => {
     get("/api/whoami").then((user) => {
       setUserId(user._id);
       setName(user.name);
-      get("/api/specificRecipes", { _id: user._id }).then((recipes) => {
+      get("/api/recipes").then((recipes) => {
         setRecipes(Object.entries(recipes));
       });
     });
   });
+  
+  let yourRecipes = <div> No Recipes Currently. Go to feed to add recipes. </div>
+  if (recipes.length !== 0) {
+    yourRecipes = recipes.map((RecipeObj) => {
+      // if (RecipeObj.creator_id === userId) {
+        return (
+          <Card
+            key={`Card_${RecipeObj._id}`}
+            _id = {RecipeObj._id}
+            recipe_id={RecipeObj.recipe_id}
+            creator_id={RecipeObj.creator_id}
+            creator_name={RecipeObj.creator_name}
+            name={RecipeObj.name}
+            ingredients={RecipeObj.ingredients}
+            instructions={RecipeObj.instructions}
+            public={RecipeObj.public}
+            userId = {userId}
+          />
+        );
+    });
+  }
 
   const profileLeftWidth = "35%";
   const profileRightWidth = "65%";
@@ -190,13 +211,15 @@ const Profile = () => {
           justifyContent={"center"}
           left={profileLeftWidth}
         >
+          
           {recipes.length === 0 ? (
             <Card>
               <CardHeader>
-                <Heading size="md"> No Recipes</Heading>
+                <Heading size="md"> Your Recipes</Heading>
               </CardHeader>
               <CardBody>
-                <Text>You have no recipes currently. Go to feed to add recipes.</Text>
+                {/* <Text>You have no recipes currently. Go to feed to add recipes.</Text> */}
+                {yourRecipes}
               </CardBody>
             </Card>
           ) : (
