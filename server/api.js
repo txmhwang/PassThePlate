@@ -12,7 +12,7 @@ const express = require("express");
 // import models so we can interact with the database
 const User = require("./models/user");
 const Recipe = require("./models/recipe");
-const Comment = require("./models/Comment");
+const Comment = require("./models/comment");
 
 // import authentication library
 const auth = require("./auth");
@@ -59,16 +59,6 @@ router.get("/strangers", (req, res) => {
     res.send(users);
   });
 });
-
-// router.get("/feed", (req, res)=>{
-//   const friendids = req.query.friendids;
-//   Recipe.find({_id: {$in: friendids}}, (err, docs)=>{
-//     if(err) {
-//       return res.status(500).send(err);
-//     }
-//     res.send(docs);
-//   });
-// });
 
 
 router.post("/createUser", (req, res) => {
