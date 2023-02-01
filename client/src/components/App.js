@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Router } from "@reach/router";
+import { Routes, Route } from "react-router-dom";
+
 import jwt_decode from "jwt-decode";
 
 import NavBar from "./modules/NavBar.js";
@@ -10,10 +11,26 @@ import NotFound from "./pages/NotFound.js";
 // import Skeleton from "./pages/Skeleton.js";
 
 import "../utilities.css";
+import Homepage from "./pages/Home.js";
+import LoginPage from "./pages/Login.js";
+import Feed from "./pages/Feed.js";
+import Explore from "./pages/Explore.js";
+import Profile from "./pages/Profile.js";
 
 import { socket } from "../client-socket.js";
+import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 
 import { get, post } from "../utilities";
+
+import { Fonts } from "./Fonts";
+import NavBar from "./modules/NavBar";
+
+const theme = extendTheme({
+  fonts: {
+    heading: "Open Sans",
+    body: "Raleway",
+  },
+});
 
 /**
  * Define the "App" component
@@ -47,16 +64,10 @@ const App = () => {
 
   return (
     <>
-      <NavBar/>
-      <div className="App-container">
-        <Router>
-          <Homepage path="/" />
-          <Feed path="/feed/" />
-          <Explore path="/explore/" />
-          {/* <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} /> */}
-          <NotFound default />
-        </Router>
-      </div>
+      <Router>
+        <Skeleton path="/" handleLogin={handleLogin} handleLogout={handleLogout} userId={userId} />
+        <NotFound default />
+      </Router>
     </>
   );
 };

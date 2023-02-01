@@ -15,10 +15,9 @@
 */
 
 /* TODO: REPLACE WITH YOUR OWN FONT! */
-/* @import url("https://fonts.googleapis.com/css?family=Roboto&display=swap"); */
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300&display=swap');
-
+@import url("https://fonts.googleapis.com/css?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
 
 :root {
   --primary: #396dff;
@@ -46,6 +45,15 @@ body {
 
 h1 {
   font-family: 'Open Sans', sans-serif;
+  font-size: 700px;
+  letter-spacing: 6px;
+}
+
+h2 {
+  font-size: 30px;
+  font-family: 'Open Sans', sans-serif;
+  font-weight: 600;
+
 }
 
 form {
@@ -71,6 +79,15 @@ form {
 
 .u-inlineBlock {
   display: inline-block;
+}
+
+.u-toppad {
+  padding-top: var(--l);
+}
+.u-text{
+  font-family: 'Poppins', sans-serif;
+  font-size: 15px;
+  letter-spacing: 1px;
 }
 
 .u-bold {

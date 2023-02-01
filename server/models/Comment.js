@@ -1,14 +1,13 @@
-const { Int32 } = require("mongodb");
 const mongoose = require("mongoose");
 
+//define a story schema for the database
 const CommentSchema = new mongoose.Schema({
-  comment_id: String,
-  user_id: String,
+  parent: String,
+  creator_id: String,
+  creator_name: String,
+  content: String,
   rating: String,
-  hours: Int32,
-  date: String,
-  helpful_unhelpful: Boolean,
-  pictures: String
+  hours: String,
 });
 
 // compile model from schema
